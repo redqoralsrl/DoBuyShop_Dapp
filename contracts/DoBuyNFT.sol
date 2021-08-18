@@ -10,8 +10,10 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 contract DoBuyNFT is ERC721URIStorage {
   using Counters for Counters.Counter;
 
+  /// @dev NFT Ids
   Counters.Counter private _tokenIds;
 
+  /// @dev NFT struct
   struct NFTcard {
     uint256 _Ids; // NFT serial number
     uint256 timestamp; // Time Created
@@ -24,8 +26,10 @@ contract DoBuyNFT is ERC721URIStorage {
   mapping (uint256 => address) public _DoBuyToOwner;
   event DoBuyCreated (address , uint256);
 
+  /// @dev Trade Ids
   Counters.Counter private _tradeIds;
 
+  /// @dev Trade struct
   struct tradeTrans {
     address _from;
     address _to;
@@ -36,18 +40,17 @@ contract DoBuyNFT is ERC721URIStorage {
   mapping (uint256 => tradeTrans) public _TradeTransaction;
 
   constructor() ERC721("DoBuyNFT", "DBNFT") {
-    _DoBuylist[_tokenIds.current()] = NFTcard(_tokenIds.current(), block.timestamp, "DoBuy Strat!", "");
+    _DoBuylist[_tokenIds.current()] = NFTcard(_tokenIds.current(), block.timestamp, "DoBuy Start!", "");
     _DoBuyToOwner[_tokenIds.current()] = msg.sender;
     emit DoBuyCreated(msg.sender, _tokenIds.current());
   }
 
   /**
-   *  @notice make NFT
    *  @dev NFT 제작 및 NFT Token 제작
    *  @param _name NFT 제목
    *  @param _image_url NFT 이미지 경로
    */
-  function mint(string memory _name, string memory _image_url) public {
+  function mint(string memory _name, string memory _image_url) external {
     _tokenIds.increment();
     uint256 newItemId = _tokenIds.current();
     _DoBuylist[newItemId] = NFTcard(newItemId, block.timestamp, _name, _image_url);
@@ -56,13 +59,23 @@ contract DoBuyNFT is ERC721URIStorage {
     emit DoBuyCreated(msg.sender, newItemId);
   }
 
-  function transferNFT(uint256 _Id) public {
+  /**
+   *  @dev NFT 개인간의 거래
+   *  @param _Id NFT _Ids
+   */
+  function transferNFT(uint256 _Id) external {
     address temp = _DoBuyToOwner[_Id];
     _tradeIds.increment();
-    safeTransferFrom(temp, msg.sender, _Id);
+    _transfer(temp, msg.sender, _Id);
     _DoBuyToOwner[_Id] = msg.sender;
     _TradeTransaction[_tradeIds.current()] = tradeTrans(temp, msg.sender, _DoBuylist[_Id].name);
+  }
 
+  /**
+   *
+   */
+  function buyNFT() external {
+    
   }
 
     //   /// @dev NFT 양도
