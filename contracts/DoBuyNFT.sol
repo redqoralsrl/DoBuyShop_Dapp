@@ -10,10 +10,8 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 contract DoBuyNFT is ERC721URIStorage {
   using Counters for Counters.Counter;
 
-  /// @notice NFT Ids
   Counters.Counter private _tokenIds;
 
-  /// @notice NFT struct
   struct NFTcard {
     uint256 _Ids; // NFT serial number
     uint256 timestamp; // Time Created
@@ -26,10 +24,8 @@ contract DoBuyNFT is ERC721URIStorage {
   mapping (uint256 => address) public _DoBuyToOwner;
   event DoBuyCreated (address , uint256);
 
-  /// @notice Trade Ids
   Counters.Counter private _tradeIds;
 
-  /// @notice Trade struct
   struct tradeTrans {
     address _from;
     address _to;
@@ -60,12 +56,12 @@ contract DoBuyNFT is ERC721URIStorage {
     emit DoBuyCreated(msg.sender, newItemId);
   }
 
-  function transferNFT(uint256 memory _Id) public {
-    address memory temp = _DoBuyToOwner[_Id];
+  function transferNFT(uint256 _Id) public {
+    address temp = _DoBuyToOwner[_Id];
     _tradeIds.increment();
     safeTransferFrom(temp, msg.sender, _Id);
     _DoBuyToOwner[_Id] = msg.sender;
-    _TradeTransaction[_tradeIds] = tradeTrans(temp, msg.sender, _DoBuylist[_Id].name);
+    _TradeTransaction[_tradeIds.current()] = tradeTrans(temp, msg.sender, _DoBuylist[_Id].name);
 
   }
 
@@ -78,8 +74,4 @@ contract DoBuyNFT is ERC721URIStorage {
     //     approve(msg.sender, newItemId);
     //     safeTransferFrom(ownerOf(newItemId), msg.sender, newItemId);
     // }
-
-  function () payable {
-    
-  }
 }

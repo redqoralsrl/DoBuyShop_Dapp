@@ -1,8 +1,8 @@
-const DoBuy = artifacts.require("DoBuy");
+const DoBuyToken = artifacts.require("DoBuyToken");
 const DoBuyNFT = artifacts.require("DoBuyNFT");
 
 module.exports = function(deployer) {
-    deployer.deploy(DoBuy);
-    deployer.link(DoBuy, DoBuyNFT);
+    deployer.deploy(DoBuyToken);
+    deployer.link(DoBuyToken, DoBuyNFT);
     deployer.deploy(DoBuyNFT);
 }
