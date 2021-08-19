@@ -11,7 +11,7 @@ contract DoBuyNFT is ERC721URIStorage {
   using Counters for Counters.Counter;
 
   /// @dev NFT Ids
-  Counters.Counter private _tokenIds;
+  Counters.Counter public _tokenIds;
 
   /// @dev NFT struct
   struct NFTcard {
@@ -27,7 +27,7 @@ contract DoBuyNFT is ERC721URIStorage {
   event DoBuyCreated (address , uint256);
 
   /// @dev Trade Ids
-  Counters.Counter private _tradeIds;
+  Counters.Counter public _tradeIds;
 
   /// @dev Trade struct
   struct tradeTrans {
@@ -40,7 +40,7 @@ contract DoBuyNFT is ERC721URIStorage {
   mapping (uint256 => tradeTrans) public _TradeTransaction;
 
   constructor() ERC721("DoBuyNFT", "DBNFT") {
-    _DoBuylist[_tokenIds.current()] = NFTcard(_tokenIds.current(), block.timestamp, "DoBuy Start!", "");
+    _DoBuylist[_tokenIds.current()] = NFTcard(_tokenIds.current(), block.timestamp, "DoBuy Start!", "DoBuy.png");
     _DoBuyToOwner[_tokenIds.current()] = msg.sender;
     emit DoBuyCreated(msg.sender, _tokenIds.current());
   }
