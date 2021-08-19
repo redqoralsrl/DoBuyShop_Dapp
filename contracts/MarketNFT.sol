@@ -31,13 +31,28 @@ contract MarketNFT is DoBuyNFT, Ownable {
         _MarketList[_MarketIds.current()] = MarketList(_MarketIds.current(), 0, 0, "NFT SHOP", "DoBuy.png");
     }
 
+    /**
+    *  @dev MarketList의 물건 추가
+    *  @param _ETH ETH 가격
+    *  @param _DoBuy DoBuy 가격
+    *  @param _name 물건 이름
+    *  @param _img_url 물건 사진경로
+    */
     function setMarketList(uint16 _ETH, uint16 _DoBuy, string memory _name, string memory _img_url) external onlyOwner {
         _MarketIds.increment();
         uint256 newMarketId = _MarketIds.current();
         _MarketList[newMarketId] = MarketList(newMarketId, _ETH, _DoBuy, _name, _img_url);
     }
 
-    function delMarketList(uint256 _ids) {
-        
+    /**
+    *  @dev MarketList의 물건 삭제
+    *  @param _num_ids 물건 고유번호
+    */
+    function delMarketList(uint256 _num_ids) external onlyOwner {
+        delete _MarketList[_num_ids];
+    }
+
+    function buyMarket(uint256 _num_ids) external {
+        marketBuy(_MarketList[_num_ids].name, _MarketList[_num_ids].img_url);
     }
 }

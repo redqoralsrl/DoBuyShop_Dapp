@@ -60,7 +60,7 @@ contract DoBuyNFT is ERC721URIStorage {
    *  @param _name NFT 제목
    *  @param _image_url NFT 이미지 경로
    */
-  function mint(string memory _name, string memory _image_url) external {
+  function mint(string memory _name, string memory _image_url) public {
     _tokenIds.increment();
     uint256 newItemId = _tokenIds.current();
     _DoBuylist[newItemId] = NFTcard(newItemId, block.timestamp, _name, _image_url);
@@ -92,16 +92,20 @@ contract DoBuyNFT is ERC721URIStorage {
     // }
 
 
-    /// @dev delivery - 배송 누르면 기존 NFT 제거
-    function burnNFT(uint256 _Id) external {
-      require(ownerOf(_Id) == msg.sender);    // 자기 NFT만 burn 가능. 관리자도 burn 가능하게 할까...
-      _burn(_Id);   // NFT burn
+  /// @dev delivery - 배송 누르면 기존 NFT 제거
+  function burnNFT(uint256 _Id) external {
+    require(ownerOf(_Id) == msg.sender);    // 자기 NFT만 burn 가능. 관리자도 burn 가능하게 할까...
+    _burn(_Id);   // NFT burn
       
-      // 1 - 될지 모르겠음
-      delete _DoBuyToOwner[_Id];  // 해당 NFT 소유자 배열(_DoBuyToOwner) 삭제
-      delete _DoBuylist[_Id];   // 해당 NFT card를 가진 _DoBuylist 배열 삭제 
+    // 1 - 될지 모르겠음
+    delete _DoBuyToOwner[_Id];  // 해당 NFT 소유자 배열(_DoBuyToOwner) 삭제
+    delete _DoBuylist[_Id];   // 해당 NFT card를 가진 _DoBuylist 배열 삭제 
 
-      // 2 - 안되면 이런식으로 하기
-      // _DoBuyToOwner[_Id] = address(0);    // 해당 NFT 소유자 배열(_DoBuyToOwner) clear
-    }
+    // 2 - 안되면 이런식으로 하기
+    // _DoBuyToOwner[_Id] = address(0);    // 해당 NFT 소유자 배열(_DoBuyToOwner) clear
+  }
+    
+  function marketBuy(string memory _name, string memory _img_url) external {
+    mint(_name, _img_url);
+  }
 }
