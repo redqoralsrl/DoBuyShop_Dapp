@@ -1,0 +1,27 @@
+* {
+    margin:0;
+    padding:0;
+    text-decoration: none;
+    list-style: none;
+}
+.Assert {
+    /* display: flex; */
+}
+.left {
+    width: 340px;
+}
+.assert_body {
+    width: 100%;
+    overflow-x: hidden;
+    padding-top: 8px;
+    margin-top: -8px;
+    box-sizing: border-box;
+}
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(100% + 100px);
+}
+.single_box {
+    padding: 8px;
+}

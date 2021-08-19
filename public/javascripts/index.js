@@ -74,23 +74,23 @@ Index = {
             }
         });
 
-        Index.contracts.DoBuyNFT.deployed().then(function(instance) {
-            DoBuyNFTInstance = instance;
-            return DoBuyNFTInstance._DoBuylist(0);
-        }).then(function(DoBuylist) {
-            let NFTcards = $("#nftcards");
-            NFTcards.empty();
+        // Index.contracts.DoBuyNFT.deployed().then(function(instance) {
+        //     DoBuyNFTInstance = instance;
+        //     return DoBuyNFTInstance._DoBuylist(0);
+        // }).then(function(DoBuylist) {
+        //     let NFTcards = $("#nftcards");
+        //     NFTcards.empty();
 
-            let _Ids = DoBuylist[0];
-            let timestamp = DoBuylist[1];
-            let name = DoBuylist[2];
-            let image_url = DoBuylist[3];
+        //     let _Ids = DoBuylist[0];
+        //     let timestamp = DoBuylist[1];
+        //     let name = DoBuylist[2];
+        //     let image_url = DoBuylist[3];
 
-            let temp = "<div>" + _Ids + "<img src=/images/" + image_url + ">" + timestamp + name + "</div>";
-            NFTcards.append(temp);
-        }).catch(function(error) {
-            console.warn(error);
-        });
+        //     let temp = "<div>" + _Ids + "<img src=/images/" + image_url + ">" + timestamp + name + "</div>";
+        //     NFTcards.append(temp);
+        // }).catch(function(error) {
+        //     console.warn(error);
+        // });
     },
 };
 

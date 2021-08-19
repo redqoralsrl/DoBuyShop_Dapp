@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract DoBuyNFT is ERC721URIStorage {
   using Counters for Counters.Counter;
-
+  address private owner;
   /// @dev NFT Ids
   Counters.Counter public _tokenIds;
 
@@ -40,6 +40,7 @@ contract DoBuyNFT is ERC721URIStorage {
   mapping (uint256 => tradeTrans) public _TradeTransaction;
 
   constructor() ERC721("DoBuyNFT", "DBNFT") {
+    owner = msg.sender;
     _DoBuylist[_tokenIds.current()] = NFTcard(_tokenIds.current(), block.timestamp, "DoBuy Start!", "DoBuy.png");
     _DoBuyToOwner[_tokenIds.current()] = msg.sender;
     emit DoBuyCreated(msg.sender, _tokenIds.current());
