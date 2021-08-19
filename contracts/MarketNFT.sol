@@ -16,21 +16,15 @@ contract MarketNFT is DoBuyNFT, Ownable {
 
     // 마켓 정보
     mapping (uint256 => MarketList) public _MarketList;
-    mapping (uint256 => address) public _MarketToOwner;
-    mapping (address => Have) public _MarketSample;
+    // mapping (uint256 => address) public _MarketToOwner;
 
-    /// @dev Market NFT
+    /// @dev Market 
     struct MarketList {
-        uint256 _ids; // NFT serial number
+        uint256 _ids; // serial number
         uint16 price_ETH; // Price of ETH
         uint16 price_DoBuy; // Price of DoBuy
-        string name; // NFT names
+        string name; // names
         string img_url; // IMAGE URL
-    }
-
-    struct Have {
-        string name[]; // product name
-        uint16 amount[]; // product amount
     }
 
     constructor() {
@@ -41,5 +35,9 @@ contract MarketNFT is DoBuyNFT, Ownable {
         _MarketIds.increment();
         uint256 newMarketId = _MarketIds.current();
         _MarketList[newMarketId] = MarketList(newMarketId, _ETH, _DoBuy, _name, _img_url);
+    }
+
+    function delMarketList(uint256 _ids) {
+        
     }
 }
