@@ -71,14 +71,7 @@ contract DoBuyNFT is ERC721URIStorage {
     _DoBuyToOwner[_Id] = msg.sender;
     _TradeTransaction[_tradeIds.current()] = tradeTrans(temp, msg.sender, _DoBuylist[_Id].name);
   }
-
-  /**
-   *
-   */
-  function buyNFT() external {
-    
-  }
-
+  
     //   /// @dev NFT 양도
     // /// 1. 판매자가 사이트에 NFT 판매글 올려놓으면 구매자가 선택해서 구매 (소유자: 판매자)
     // /// 2. 구매자가 구매 버튼으로 판매자에게 토큰 지불
