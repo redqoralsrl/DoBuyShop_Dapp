@@ -27,20 +27,43 @@ contract DoBuyToken is ERC20 {
 
     /// @dev 운송장 정보
     struct deliveryBill {
-        uint256 _Ids;   //trackingId
+        uint256 _Ids;   // 운송장번호 - counter
         uint16 amount;
+        string name;
         string sender;
         string receiver;
-        string name;
     }
+
+    /// @dev 배송추적 정보
+    /// 출발지: 금복빌딩 / 배송중: 김포, 곤지암, 이천, 광주Hub 중 랜덤 / 배송완료: 입력한 배송도착지
+    struct deliveryTracking {
+        uint256 timestamp;
+        string location;    
+        string status;  // 배송출발, 배송중, 배송완료
+    }
+
+    // 운송장 배열
+    mapping (uint256 => deliveryBill) public billArray;
+
+    // 배송추적 배열 : trackingId 로 매칭
+    mapping (uint256 => deliveryTracking) public trackingArray;
 
     constructor() ERC20("DoBuyToken", "DBT") {
         address owners = msg.sender;
         _mint(owners, INITIAL_SUPPLY * 10 ** (uint(decimals())));
     }
     
-    /// @dev delivery - 배송 시작
-    function deliveryStart(uint256 NFT) public {
+    /**
+    * @dev 배송 선택 시. 수령자 이름, 상품 수량, 배송도착지 입력받아야 함.
+    * @param _name 상품명
+    * @param _receiver 구매자 이름
+    * @param _amount 수량
+     */
+    function deliveryStart(string memory _name, string memory _receiver, uint16 _amount) public {
         _trackingIds.increment();
+        billArray[_trackingIds.current()] = 
+            deliveryBill(_trackingIds.current(), _amount, _name, "DoBuy Market", _receiver);
+        trackingArray[_trackingIds.current()] = 
+            deliveryTracking(block.timestamp, "geumbok building", "Start Delivery");
     }
 }
