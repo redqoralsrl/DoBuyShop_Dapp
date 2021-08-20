@@ -20,8 +20,84 @@
 .content {
     display: flex;
     flex-wrap: wrap;
-    width: calc(100% + 100px);
+    /* width: calc(100% + 100px); */
+    width: 100%;
 }
-.single_box {
-    padding: 8px;
+.content_box {
+    width: 200px;
+    height: 250px;
+    padding: 5px 5px;
+    border: 1px solid #aaaaaa;
+    border-radius: 10px 10px;
+    text-align: center;
+    margin: 10px 10px;
+}
+.content_box:hover {
+    box-shadow: 2px 2px #9b9b9b;
+}
+.content_box img {
+    width: 100px;
+    height: 100px;
+}
+.content_box div {
+    margin-top: 5px;
+}
+.content_name {
+    font-weight: bolder;
+}
+.content_eth {
+    color: #e41d1d;
+    font-weight: bold;
+    font-size: 15px;
+}
+.content_eth input {
+    width: 150px;
+    text-align: right;
+    border: none;
+}
+.content_eth img {
+    width: 20px;
+    height: 20px;
+}
+.content_be {
+    text-align: right;
+}
+.eth_btn {
+    font-size: 15px;
+    color: #fff;
+    padding: 2px 2px;
+    border-radius: 5px 5px;
+    border: 1px solid #1f61ee;
+    background: #2baaff;
+}
+.eth_btn:hover {
+    background: #1f61ee;
+}
+.content_do {
+    color: #1d84e4;
+    font-weight: bold;
+    font-size: 15px;
+}
+.content_do input {
+    width: 150px;
+    text-align: right;
+    border: none;
+}
+.content_do img {
+    width: 20px;
+    height: 20px;
+}
+.content_bd {
+    text-align: right;
+}
+.do_btn {
+    font-size: 15px;
+    color: #fff;
+    padding: 2px 2px;
+    border-radius: 5px 5px;
+    border: 1px solid #1f61ee;
+    background: #2baaff;
+}
+.do_btn:hover {
+    background: #1f61ee;
 }

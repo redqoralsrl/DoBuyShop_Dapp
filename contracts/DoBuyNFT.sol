@@ -11,20 +11,20 @@ contract DoBuyNFT is ERC721URIStorage {
   using Counters for Counters.Counter;
   address private owner;
   /// @dev NFT Ids
-  Counters.Counter public _tokenIds;
+  uint32 public _tokenIds;
 
   /// @dev NFT struct
   struct NFTcard {
-    uint256 _Ids; // NFT serial number
+    uint32 _Ids; // NFT serial number
     uint256 timestamp; // Time Created
     string name; // NFT names
     string image_url; // IMAGE URL
   }
 
   // 토큰 생성
-  mapping (uint256 => NFTcard) public _DoBuylist;
-  mapping (uint256 => address) public _DoBuyToOwner;
-  event DoBuyCreated (address , uint256);
+  mapping (uint32 => NFTcard) public _DoBuylist;
+  mapping (uint32 => address) public _DoBuyToOwner;
+  event DoBuyCreated (address , uint32);
 
   /// @dev NFT Have
   struct Have {
@@ -38,7 +38,7 @@ contract DoBuyNFT is ERC721URIStorage {
   Have[] public haveitem;
 
   /// @dev Trade Ids
-  Counters.Counter public _tradeIds;
+  uint32 public _tradeIds;
 
   /// @dev Trade struct
   struct tradeTrans {
@@ -52,9 +52,9 @@ contract DoBuyNFT is ERC721URIStorage {
 
   constructor() ERC721("DoBuyNFT", "DBNFT") {
     owner = msg.sender;
-    _DoBuylist[_tokenIds.current()] = NFTcard(_tokenIds.current(), block.timestamp, "DoBuy Start!", "DoBuy.png");
-    _DoBuyToOwner[_tokenIds.current()] = msg.sender;
-    emit DoBuyCreated(msg.sender, _tokenIds.current());
+    _DoBuylist[_tokenIds] = NFTcard(_tokenIds, block.timestamp, "DoBuy Start!", "DoBuy.png");
+    _DoBuyToOwner[_tokenIds] = msg.sender;
+    emit DoBuyCreated(msg.sender, _tokenIds);
   }
 
   /**
@@ -63,8 +63,8 @@ contract DoBuyNFT is ERC721URIStorage {
    *  @param _image_url NFT 이미지 경로
    */
   function mint(string memory _name, string memory _image_url) public {
-    _tokenIds.increment();
-    uint256 newItemId = _tokenIds.current();
+    _tokenIds++;
+    uint32 newItemId = _tokenIds;
     _DoBuylist[newItemId] = NFTcard(newItemId, block.timestamp, _name, _image_url);
     _mint(msg.sender, newItemId);
     _DoBuyToOwner[newItemId] = msg.sender;
@@ -75,12 +75,12 @@ contract DoBuyNFT is ERC721URIStorage {
    *  @dev NFT 개인간의 거래
    *  @param _Id NFT _Ids
    */
-  function transferNFT(uint256 _Id) external {
+  function transferNFT(uint32 _Id) external {
     address temp = _DoBuyToOwner[_Id];
-    _tradeIds.increment();
+    _tradeIds++;
     _transfer(temp, msg.sender, _Id);
     _DoBuyToOwner[_Id] = msg.sender;
-    _TradeTransaction[_tradeIds.current()] = tradeTrans(temp, msg.sender, _DoBuylist[_Id].name);
+    _TradeTransaction[_tradeIds] = tradeTrans(temp, msg.sender, _DoBuylist[_Id].name);
   }
 
     //   /// @dev NFT 양도
@@ -95,7 +95,7 @@ contract DoBuyNFT is ERC721URIStorage {
 
 
   /// @dev delivery - 배송 누르면 기존 NFT 제거
-  function burnNFT(uint256 _Id) external {
+  function burnNFT(uint32 _Id) external {
     require(ownerOf(_Id) == msg.sender);    // 자기 NFT만 burn 가능. 관리자도 burn 가능하게 할까...
     _burn(_Id);   // NFT burn
       

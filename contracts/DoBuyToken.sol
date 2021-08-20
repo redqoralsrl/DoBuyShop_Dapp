@@ -7,6 +7,8 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 contract DoBuyToken is ERC20 {
     using Counters for Counters.Counter;
 
+    address public owners;
+
     /// @notice 토큰 이름
     string public constant _token = "DoBuyToken";
 
@@ -49,7 +51,7 @@ contract DoBuyToken is ERC20 {
     mapping (uint256 => deliveryTracking) public trackingArray;
 
     constructor() ERC20("DoBuyToken", "DBT") {
-        address owners = msg.sender;
+        owners = msg.sender;
         _mint(owners, INITIAL_SUPPLY * 10 ** (uint(decimals())));
     }
     
@@ -65,5 +67,15 @@ contract DoBuyToken is ERC20 {
             deliveryBill(_trackingIds.current(), _amount, _name, "DoBuy Market", _receiver);
         trackingArray[_trackingIds.current()] = 
             deliveryTracking(block.timestamp, "geumbok building", "Start Delivery");
+    }
+
+    function getOwnerToken(uint256 _amounts) public returns(bool){
+        if(balanceOf(msg.sender) >= _amounts){
+            transferFrom(msg.sender, owners, _amounts);
+            return true;
+        } else {
+            return false;
+        }
+        
     }
 }

@@ -12,7 +12,7 @@ contract MarketNFT is DoBuyNFT, Ownable {
     using SafeMath16 for uint16;
 
     /// @dev Market Ids
-    Counters.Counter public _MarketIds;
+    uint32 public _MarketIds;
 
     // 마켓 정보
     mapping (uint256 => MarketList) public _MarketList;
@@ -21,14 +21,20 @@ contract MarketNFT is DoBuyNFT, Ownable {
     /// @dev Market 
     struct MarketList {
         uint256 _ids; // serial number
-        uint16 price_ETH; // Price of ETH
-        uint16 price_DoBuy; // Price of DoBuy
+        uint256 price_ETH; // Price of ETH
+        uint256 price_DoBuy; // Price of DoBuy
         string name; // names
         string img_url; // IMAGE URL
     }
 
     constructor() {
-        _MarketList[_MarketIds.current()] = MarketList(_MarketIds.current(), 0, 0, "NFT SHOP", "DoBuy.png");
+        _MarketList[_MarketIds] = MarketList(_MarketIds, 0, 0, "NFT SHOP", "DoBuy.png");
+        _MarketIds++;
+        _MarketList[_MarketIds] = MarketList(_MarketIds, 12, 12000000, "Potato", "DoBuy.png");
+        _MarketIds++;
+        _MarketList[_MarketIds] = MarketList(_MarketIds, 15, 25000000, "Banana", "DoBuy.png");
+        _MarketIds++;
+        _MarketList[_MarketIds] = MarketList(_MarketIds, 10, 10000000, "Apple", "DoBuy.png");
     }
 
     /**
@@ -38,9 +44,9 @@ contract MarketNFT is DoBuyNFT, Ownable {
     *  @param _name 물건 이름
     *  @param _img_url 물건 사진경로
     */
-    function setMarketList(uint16 _ETH, uint16 _DoBuy, string memory _name, string memory _img_url) external onlyOwner {
-        _MarketIds.increment();
-        uint256 newMarketId = _MarketIds.current();
+    function setMarketList(uint256 _ETH, uint256 _DoBuy, string memory _name, string memory _img_url) external onlyOwner {
+        _MarketIds++;
+        uint256 newMarketId = _MarketIds;
         _MarketList[newMarketId] = MarketList(newMarketId, _ETH, _DoBuy, _name, _img_url);
     }
 
