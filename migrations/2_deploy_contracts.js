@@ -4,9 +4,9 @@ const MarketNFT = artifacts.require("MarketNFT");
 
 module.exports = function(deployer) {
     deployer.deploy(DoBuyToken);
-    // deployer.link(DoBuyToken, DoBuyNFT);
-    deployer.autolink();
+    // deployer.autolink();
     deployer.deploy(DoBuyNFT);
-    deployer.autolink();
+    // deployer.autolink();
     deployer.deploy(MarketNFT);
+    deployer.link(DoBuyToken, [DoBuyNFT,MarketNFT]);
 }

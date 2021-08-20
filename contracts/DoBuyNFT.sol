@@ -28,12 +28,14 @@ contract DoBuyNFT is ERC721URIStorage {
 
   /// @dev NFT Have
   struct Have {
-    string[] name; // product name
-    uint16[] amount; // product amount
+    string name; // product name
+    uint16 amount;
+    address user_wallet;    
   }
 
-  /// @dev NFT 보유 수량
-  mapping (address => Have) DoBuyCounts;
+  // /// @dev NFT 보유 수량
+  // mapping (uint256 => address) DoBuyCounts;
+  Have[] public haveitem;
 
   /// @dev Trade Ids
   Counters.Counter public _tradeIds;
@@ -105,7 +107,16 @@ contract DoBuyNFT is ERC721URIStorage {
     // _DoBuyToOwner[_Id] = address(0);    // 해당 NFT 소유자 배열(_DoBuyToOwner) clear
   }
     
-  function marketBuy(string memory _name, string memory _img_url) external {
+
+  function _marketBuy(string memory _name, string memory _img_url) internal returns(bool) {
     mint(_name, _img_url);
+    for(uint256 i = 0; i < haveitem.length; i++) {
+      if(haveitem[i].user_wallet == msg.sender && keccak256(bytes( haveitem[i].name)) == keccak256(bytes(_name))){
+          haveitem[i].amount++;
+          return true;
+      }
+    }
+    haveitem.push(Have(_name, 1, msg.sender));
+    return false;
   }
 }

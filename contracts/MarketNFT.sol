@@ -53,6 +53,6 @@ contract MarketNFT is DoBuyNFT, Ownable {
     }
 
     function buyMarket(uint256 _num_ids) external {
-        marketBuy(_MarketList[_num_ids].name, _MarketList[_num_ids].img_url);
+        _marketBuy(_MarketList[_num_ids].name, _MarketList[_num_ids].img_url);
     }
 }
