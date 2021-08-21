@@ -93,6 +93,11 @@ contract DoBuyToken is ERC20 {
         }
     }
 
+    /**
+     * @dev MarketNFT구매시 DoBuyToken 차감시키는 함수
+     * @param _amounts 해당 금액이 들어온다
+     * @return 해당 값의 진행이 참인지 거짓인지 반환
+     */
     function getOwnerToken(uint256 _amounts) public returns(bool){
         if(balanceOf(msg.sender) >= _amounts){
             transferFrom(msg.sender, owners, _amounts);

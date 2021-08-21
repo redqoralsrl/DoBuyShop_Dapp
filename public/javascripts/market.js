@@ -11,7 +11,8 @@ Market = {
         if(window.ethereum) {
             Market.web3Provider = window.ethereum;
             try {
-                await window.ethereum.enable();
+                // await window.ethereum.enable();
+                await window.ethereum.eth_requestAccounts;
             } catch(error) {
                 console.error("user denied account access");
             }
@@ -66,26 +67,48 @@ Market = {
                     console.warn(error);
                 });
             }
+            return MarketNFTInstance.ProductCounts();
+        }).then(function(proCounts) {
+            let box = $(".list_body");
+            box.empty();
+            for(let i = 0; i < proCounts; i--){
+                MarketNFTInstance.ProductBuy(i).then(function(list) {
+                    let temp = `
+                        <div class="list_data">${list[i].name_product} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ${list[i].whobuy}</div>
+                    `;
+                    box.append(temp);
+                }).catch(function(error) {
+                    console.warn(error);
+                });
+            }
         })
     },
 
-    buyIt: async function(token, _Ids) {
+    buyIt: function(token, _Ids) {
         let TokenInstance;
         let MarketNFTInstance;
         Market.contracts.DoBuyToken.deployed().then(function(instance) {
             TokenInstance = instance;
             Market.contracts.MarketNFT.deployed().then(function(instance1) {
                 MarketNFTInstance = instance1;
+                let money = token * (10 ** 18);
                 if(token == "eth"){
-    
+                    web3.sendTransaction({
+                        to: Market.account, 
+                        from: TokenInstance.owners, 
+                        value: web3.toWei(`${token}`,'ether'),
+                        gas: 90000
+                    });
+                    MarketNFTInstance.buyMarket(_Ids);
                 }else if(token == "dobuy") {
-                
+                    let result = TokenInstance.getOwnerToken(money);
+                    if(result) {
+                        MarketNFTInstance.buyMarket(_Ids);
+                    }
                 }
             });
-        });
-        
-        
-    }
+        });  
+    },
 
 };
 

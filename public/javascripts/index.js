@@ -17,7 +17,8 @@ Index = {
         //이더리움이 있으면 프로바이더에 대입
         try{
         // Request account access
-        await window.ethereum.enable();
+        // await window.ethereum.enable();
+        await window.ethereum.eth_requestAccounts;
         }
         catch (error) {
         // user denied account access

@@ -18,23 +18,35 @@ contract MarketNFT is DoBuyNFT, Ownable {
     mapping (uint256 => MarketList) public _MarketList;
     // mapping (uint256 => address) public _MarketToOwner;
 
+    /// @dev Product Counts
+    uint32 public ProductCounts;
+    
+    /// @dev Product Transaction
+    struct ProductTrans {
+        string name_product;
+        address whobuy;
+    }
+
+    // 유저들이 사는 마켓 품목들
+    mapping (uint32 => ProductTrans) public ProductBuy;
+
     /// @dev Market 
     struct MarketList {
         uint256 _ids; // serial number
-        uint256 price_ETH; // Price of ETH
+        string price_ETH; // Price of ETH
         uint256 price_DoBuy; // Price of DoBuy
         string name; // names
         string img_url; // IMAGE URL
     }
 
     constructor() {
-        _MarketList[_MarketIds] = MarketList(_MarketIds, 0, 0, "NFT SHOP", "DoBuy.png");
+        _MarketList[_MarketIds] = MarketList(_MarketIds, "0", 0, "NFT SHOP", "DoBuy.png");
         _MarketIds++;
-        _MarketList[_MarketIds] = MarketList(_MarketIds, 12, 12000000, "Potato", "DoBuy.png");
+        _MarketList[_MarketIds] = MarketList(_MarketIds, "0.012", 1200, "Potato", "potato.jpg");
         _MarketIds++;
-        _MarketList[_MarketIds] = MarketList(_MarketIds, 15, 25000000, "Banana", "DoBuy.png");
+        _MarketList[_MarketIds] = MarketList(_MarketIds, "0.015", 2500, "Banana", "banana.jpg");
         _MarketIds++;
-        _MarketList[_MarketIds] = MarketList(_MarketIds, 10, 10000000, "Apple", "DoBuy.png");
+        _MarketList[_MarketIds] = MarketList(_MarketIds, "0.01", 1000, "Apple", "apple.jpg");
     }
 
     /**
@@ -44,7 +56,7 @@ contract MarketNFT is DoBuyNFT, Ownable {
     *  @param _name 물건 이름
     *  @param _img_url 물건 사진경로
     */
-    function setMarketList(uint256 _ETH, uint256 _DoBuy, string memory _name, string memory _img_url) external onlyOwner {
+    function setMarketList(string memory _ETH, uint256 _DoBuy, string memory _name, string memory _img_url) external onlyOwner {
         _MarketIds++;
         uint256 newMarketId = _MarketIds;
         _MarketList[newMarketId] = MarketList(newMarketId, _ETH, _DoBuy, _name, _img_url);
@@ -60,5 +72,7 @@ contract MarketNFT is DoBuyNFT, Ownable {
 
     function buyMarket(uint256 _num_ids) external {
         _marketBuy(_MarketList[_num_ids].name, _MarketList[_num_ids].img_url);
+        ProductBuy[ProductCounts] = ProductTrans(_MarketList[_num_ids].name, msg.sender);
+        ProductCounts++;
     }
 }
