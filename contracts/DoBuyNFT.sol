@@ -1,14 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
 
-
-// import "@openzeppelin/contracts/token/ERC721/presets/ERC721PresetMinterPauserAutoId.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
-
 
 contract DoBuyNFT is ERC721URIStorage {
-  using Counters for Counters.Counter;
   address private owner;
   /// @dev NFT Ids
   uint32 public _tokenIds;
@@ -108,15 +103,13 @@ contract DoBuyNFT is ERC721URIStorage {
   }
     
 
-  function _marketBuy(string memory _name, string memory _img_url) internal returns(bool) {
+  function _marketBuy(string memory _name, string memory _img_url) public {
     mint(_name, _img_url);
     for(uint256 i = 0; i < haveitem.length; i++) {
       if(haveitem[i].user_wallet == msg.sender && keccak256(bytes( haveitem[i].name)) == keccak256(bytes(_name))){
           haveitem[i].amount++;
-          return true;
       }
     }
     haveitem.push(Have(_name, 1, msg.sender));
-    return false;
   }
 }

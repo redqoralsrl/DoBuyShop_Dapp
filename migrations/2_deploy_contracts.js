@@ -9,4 +9,5 @@ module.exports = function(deployer) {
     // deployer.autolink();
     deployer.deploy(MarketNFT);
     deployer.link(DoBuyToken, [DoBuyNFT,MarketNFT]);
+    // deployer.link(DoBuyToken, MarketNFT);
 }

@@ -7,6 +7,9 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 contract DoBuyToken is ERC20 {
     using Counters for Counters.Counter;
 
+    // 현재 접속중인 지갑
+    address public now_wallet = payable(msg.sender);
+
     address public owners;
 
     /// @notice 토큰 이름
@@ -56,8 +59,8 @@ contract DoBuyToken is ERC20 {
     mapping (uint256 => deliveryTracking[]) public trackingArray;
 
     constructor() ERC20("DoBuyToken", "DBT") {
-        owners = msg.sender;
-        _mint(owners, INITIAL_SUPPLY * 10 ** (uint(decimals())));
+        owners = payable(msg.sender);
+        _mint(owners, INITIAL_SUPPLY * 10 ** _decimals);
     }
     
     /**
@@ -96,15 +99,10 @@ contract DoBuyToken is ERC20 {
     /**
      * @dev MarketNFT구매시 DoBuyToken 차감시키는 함수
      * @param _amounts 해당 금액이 들어온다
-     * @return 해당 값의 진행이 참인지 거짓인지 반환
      */
-    function getOwnerToken(uint256 _amounts) public returns(bool){
-        if(balanceOf(msg.sender) >= _amounts){
-            transferFrom(msg.sender, owners, _amounts);
-            return true;
-        } else {
-            return false;
-        }
-        
+    function getOwnerToken(uint256 _amounts) payable public {
+        uint256 prices = _amounts * 10 ** (uint(decimals()));
+        require(balanceOf(msg.sender) >= prices);
+        transfer(owners, prices);
     }
 }

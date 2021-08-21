@@ -2,14 +2,13 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 import "./DoBuyNFT.sol";
-import "./SafeMath.sol";
+// import "./SafeMath.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract MarketNFT is DoBuyNFT, Ownable {
-    using Counters for Counters.Counter;
-    using SafeMath for uint256;
-    using SafeMath32 for uint32;
-    using SafeMath16 for uint16;
+    // using SafeMath for uint256;
+    // using SafeMath32 for uint32;
+    // using SafeMath16 for uint16;
 
     /// @dev Market Ids
     uint32 public _MarketIds;
@@ -44,7 +43,7 @@ contract MarketNFT is DoBuyNFT, Ownable {
         _MarketIds++;
         _MarketList[_MarketIds] = MarketList(_MarketIds, "0.012", 1200, "Potato", "potato.jpg");
         _MarketIds++;
-        _MarketList[_MarketIds] = MarketList(_MarketIds, "0.015", 2500, "Banana", "banana.jpg");
+        _MarketList[_MarketIds] = MarketList(_MarketIds, "0.025", 2500, "Banana", "banana.jpg");
         _MarketIds++;
         _MarketList[_MarketIds] = MarketList(_MarketIds, "0.01", 1000, "Apple", "apple.jpg");
     }
@@ -71,8 +70,8 @@ contract MarketNFT is DoBuyNFT, Ownable {
     }
 
     function buyMarket(uint256 _num_ids) external {
-        _marketBuy(_MarketList[_num_ids].name, _MarketList[_num_ids].img_url);
         ProductBuy[ProductCounts] = ProductTrans(_MarketList[_num_ids].name, msg.sender);
         ProductCounts++;
+        _marketBuy(_MarketList[_num_ids].name, _MarketList[_num_ids].img_url);
     }
 }

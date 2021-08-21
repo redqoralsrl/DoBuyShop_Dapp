@@ -3,12 +3,11 @@
     padding:0;
     text-decoration: none;
     list-style: none;
-    font-family: 'Indie Flower', cursive;
-    font-weight: bolder;
-    font-size: 20px;
 }
 .Assert {
     /* display: flex; */
+    font-weight: bolder;
+    font-size: 20px;
 }
 .Assert_show {
     padding: 20px 20px;
@@ -19,11 +18,13 @@
     color: #646464;
 }
 .assert_coment {
+    font-family: 'Indie Flower', cursive;
     font-size: 25px;
     padding: 15px;
     padding-bottom: 0px;
 }
 .assert_subcom {
+    font-family: 'Indie Flower', cursive;
     font-size: 20px;
     padding: 20px;
     margin-left: 10px;
@@ -61,6 +62,7 @@
     margin-top: 5px;
 }
 .content_name {
+    font-family: 'Source Code Pro', monospace;
     font-weight: bolder;
 }
 .content_eth {
@@ -69,9 +71,13 @@
     font-size: 15px;
 }
 .content_eth input {
+    font-family: 'Source Code Pro', monospace;
     width: 150px;
     text-align: right;
     border: none;
+    font-weight: bolder;
+    font-size: 15px;
+    padding-right: 20px;
 }
 .content_eth img {
     width: 20px;
@@ -97,9 +103,12 @@
     font-size: 15px;
 }
 .content_do input {
+    font-family: 'Source Code Pro', monospace;
     width: 150px;
     text-align: right;
     border: none;
+    font-weight: bolder;
+    font-size: 15px;
 }
 .content_do img {
     width: 20px;
@@ -118,4 +127,50 @@
 }
 .do_btn:hover {
     background: #1f61ee;
+}
+.admins_btn {
+    padding: 10px 10px;
+}
+
+
+
+
+
+
+.container_under {
+    font-weight: bolder;
+    font-size: 20px;
+    padding: 20px 20px;
+    border: 1px solid #646464;
+    width: 600px;
+    margin: 10px 10px;
+    border-radius: 10px 10px;
+    height: 300px;
+    overflow: scroll;
+}
+.container_title {
+    font-family: 'Source Code Pro', monospace;
+    padding: 15px;
+}
+.list_box {
+    padding: 15px;
+}
+.list_title {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 15px;
+}
+.list_body {
+    font-size: 15px;
+}
+.list_box_show {
+    display: flex;
+}
+.list_data {
+    padding: 5px 5px;
+    font-family: 'Source Code Pro', monospace;
+    width: 150px;
+}
+.list_data2 {
+    padding: 5px 5px;
+    font-family: 'Source Code Pro', monospace;
 }

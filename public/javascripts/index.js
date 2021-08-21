@@ -17,8 +17,8 @@ Index = {
         //이더리움이 있으면 프로바이더에 대입
         try{
         // Request account access
-        // await window.ethereum.enable();
-        await window.ethereum.eth_requestAccounts;
+        await window.ethereum.enable();
+        // await window.ethereum.eth_requestAccounts;
         }
         catch (error) {
         // user denied account access
@@ -34,6 +34,7 @@ Index = {
           Index.web3Provider = new Web3.provider.HttpProvider('http://localhost:8545');
         }
         web3 = new Web3(Index.web3Provider);
+        // web3.eth.defaultAccount=web3.eth.accounts[0];
       // if (typeof web3 !== 'undefined') {
       //       // If a web3 instance is already provided by Meta Mask.
       //       Index.web3Provider = web3.currentProvider;
