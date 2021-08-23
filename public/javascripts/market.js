@@ -98,7 +98,8 @@ Market = {
                 if(own_addresss == Market.account) {
                     let adm = $('.admins_btn');
                     let temp = `
-                        <button class="admin_button" onclick="()=>Market.clicks();">NFT 추가</button>
+                        <button class="admin_button" onclick="()=>Market.clicks('plus');">NFT 추가</button>
+                        <button class="admin_button2" onclick="()=>Market.clicks('change');">가격변동</button>
                     `;
                     adm.append(temp);
                 }
@@ -131,14 +132,14 @@ Market = {
                 to: owner_address,
                 // "value": web3.utils.toWei(`${price}`,'ether')
                 value: web3.toWei(price,'ether'),
-                gas: 100000,
-            }, function(err, result) {
+                gas: 21000,
+            }, async function(err, result) {
                 if(err) {
                     console.log(err);
                 }else{
                     txn_hash = result;
-                    MarketNFTInstance.buyMarket(_Ids);
-                    Market.render();
+                    await MarketNFTInstance.buyMarket(_Ids);
+                    await Market.render();
                 }
             })
         });
@@ -157,14 +158,23 @@ Market = {
             if(res) {
                 console.log(res);
                 await MarketNFTInstance.buyMarket(_Ids);
-                Market.render();
+                await Market.render();
             }
         });
     },
 
-    clicks: function() {
+    // clicks: function(datas) {
+    //     let forms = $(".form_data");
+    //     if(datas = "plus"){
+    //         let temp = `
 
-    },
+    //         `;
+    //     } else if(datas ="change") {
+
+    //     }
+        
+    //     forms.append(temp);
+    // },
 
 };
 
