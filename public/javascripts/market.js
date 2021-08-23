@@ -98,7 +98,7 @@ Market = {
                 if(own_addresss == Market.account) {
                     let adm = $('.admins_btn');
                     let temp = `
-                        <button class="admin_button">NFT 추가</button>
+                        <button class="admin_button" onclick="()=>Market.clicks();">NFT 추가</button>
                     `;
                     adm.append(temp);
                 }
@@ -138,6 +138,7 @@ Market = {
                 }else{
                     txn_hash = result;
                     MarketNFTInstance.buyMarket(_Ids);
+                    Market.render();
                 }
             })
         });
@@ -156,8 +157,13 @@ Market = {
             if(res) {
                 console.log(res);
                 await MarketNFTInstance.buyMarket(_Ids);
+                Market.render();
             }
         });
+    },
+
+    clicks: function() {
+
     },
 
 };
