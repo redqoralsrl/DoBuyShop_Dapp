@@ -3,9 +3,11 @@ pragma solidity >=0.4.22 <0.9.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "./SafeMath.sol";
 
 contract DoBuyToken is ERC20 {
-    using Counters for Counters.Counter;
+    // using Counters for Counters.Counter;
+    // using SafeMath for uint256;
 
     // 현재 접속중인 지갑
     address public now_wallet = payable(msg.sender);
@@ -28,7 +30,9 @@ contract DoBuyToken is ERC20 {
     address public user_wallet = payable(msg.sender);
 
     /// @notice 운송장번호
-    Counters.Counter public _trackingIds;
+    // Counters.Counter public _trackingIds;
+    uint256 public _trackingIds;
+    uint256 public dd;
 
     /// @dev 운송장 정보
     struct deliveryBill {
@@ -69,11 +73,12 @@ contract DoBuyToken is ERC20 {
     * @param _receiver 구매자 이름
     * @param _amount 수량
      */
-    function deliveryStart(string memory _name, string memory _receiver, uint16 _amount) public {
-        _trackingIds.increment();
-        billArray[_trackingIds.current()] = 
-            deliveryBill(_trackingIds.current(), _amount, _name, "DoBuy Market", _receiver);
-        trackingArray[_trackingIds.current()].push(deliveryTracking(block.timestamp, "geumbok building", "Start Delivery"));
+    function deliveryStart(string memory _name, string memory _receiver, uint16 _amount) public returns (uint256){
+        // _trackingIds.increment();
+        _trackingIds++;
+        billArray[_trackingIds] = deliveryBill(_trackingIds, _amount, _name, "DoBuy Market", _receiver);
+        trackingArray[_trackingIds].push(deliveryTracking(block.timestamp, "geumbok building", "Start Delivery"));
+        return _trackingIds;
     }
     /**
     * @dev 배송 시작하면 setInterval로 시간 검사해서 작동할 함수.
