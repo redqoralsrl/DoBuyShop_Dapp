@@ -143,6 +143,25 @@
     background: #1f61ee;
 }
 .admins_btn {
+    padding: 5px 5px;
+}
+.admin_button {
+    padding: 5px 5px;
+    border-radius: 10px 10px;
+}
+.admin_button2 {
+    padding: 5px 5px;
+    border-radius: 10px 10px;
+}
+.admin_button:hover,
+.admin_button2:hover {
+    background: #999494;
+}
+.input_form {
+    margin-left: 20px;
+    border-radius: 20px 20px;
+    border: 1px solid #666666;
+    width: 600px;
     padding: 10px 10px;
 }
 
