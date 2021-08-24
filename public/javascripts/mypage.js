@@ -145,13 +145,13 @@ MyPage = {
                 //운송장, 배송 추적 정보
                 let temp = `
                     <div class="delivery_bill">
-                        <div>운송장번호: ${bill[0]}</div>
-                        <div>상품명: ${bill[2]}</div>
-                        <div>발송인: ${bill[3]}</div>
-                        <div>수령인: ${bill[4]}</div>
-                        <div>배송지: ${destination}</div>
+                        <p><span>운송장번호</span> ${bill[0]}</p>
+                        <p><span>상품명</span> ${bill[2]}</p>
+                        <p><span>발송인</span> ${bill[3]}</p>
+                        <p><span>수령인</span> ${bill[4]}</p>
+                        <p><span>배송지</span> ${destination}</p>
                     </div>
-                    <table>
+                    <table class="tracking_info">
                         <thead>
                             <tr>
                                 <th>단계</th>
@@ -167,7 +167,7 @@ MyPage = {
                             </tr>
                         </tbody>
                     </table>
-                    <button onclick="location.href='/mypage.html'">마이페이지로</button>
+                    <button class="btn_base to_my_btn" onclick="location.href='/mypage'">마이페이지로</button>
                 `
                 let getLists = $(".getLists");
                 await getLists.empty();
