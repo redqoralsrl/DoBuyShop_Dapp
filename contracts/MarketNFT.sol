@@ -74,4 +74,13 @@ contract MarketNFT is DoBuyNFT, Ownable {
         ProductCounts++;
         _marketBuy(_MarketList[_num_ids].name, _MarketList[_num_ids].img_url);
     }
+
+    function changePrice(string memory _name, string memory _Eth_price, uint256 _dobuy_price) public {
+        for(uint32 i = 1; i <= _MarketIds; i++) {
+            if(keccak256(bytes(_MarketList[i].name)) == keccak256(bytes(_name))){
+                _MarketList[i].price_ETH = _Eth_price;
+                _MarketList[i].price_DoBuy = _dobuy_price;
+            }
+        }
+    }
 }

@@ -1,3 +1,6 @@
+const multer = require('multer');
+const path = require('path');
+
 Market = {
     web3Provider: null,
     contracts: {},
@@ -98,8 +101,8 @@ Market = {
                 if(own_addresss == Market.account) {
                     let adm = $('.admins_btn');
                     let temp = `
-                        <button class="admin_button" onclick="()=>Market.clicks('plus');">NFT 추가</button>
-                        <button class="admin_button2" onclick="()=>Market.clicks('change');">가격변동</button>
+                        <button class="admin_button" onclick="Market.clicks('plus');">NFT 추가</button>
+                        <button class="admin_button2" onclick="Market.clicks('change');">가격변동</button>
                     `;
                     adm.append(temp);
                 }
@@ -139,7 +142,7 @@ Market = {
                 }else{
                     txn_hash = result;
                     await MarketNFTInstance.buyMarket(_Ids);
-                    await Market.render();
+                    await Market.init();
                 }
             })
         });
@@ -158,23 +161,130 @@ Market = {
             if(res) {
                 console.log(res);
                 await MarketNFTInstance.buyMarket(_Ids);
-                await Market.render();
+                await Market.init();
             }
         });
     },
 
-    // clicks: function(datas) {
-    //     let forms = $(".form_data");
-    //     if(datas = "plus"){
-    //         let temp = `
-
-    //         `;
-    //     } else if(datas ="change") {
-
-    //     }
+    clicks: function(datas) {
+        let forms = $(".form_data");
+        let temp = '';
+        forms.empty();
+        if(datas == "plus"){
+            temp = `
+            <div class="input_form">
+                <div class="market_name">
+                    <div>
+                        ETH 가격 :
+                        <input type="number" id="struct_eth" value="price_ETH">
+                    </div>
+                    <div>
+                        DoBuy 토큰 가격 :
+                        <input type="number" id="struct_dobuy" value="price_DoBuy">
+                    </div>
+                    <div>
+                        물건 이름 :
+                        <input type="text" id="struct_name" value="name">
+                    </div>
+                    <div>
+                        사진 :
+                        <form id="uploadForm" enctype="multipart/form-data">
+                            <input type="file" id="imageInput" accept=".gif, .jpg, .png"/>
+                        </form>
+                        <button onclick="Market.upload()">upload</button>
+                        <p id="resultUploadPath"></p>
+                    </div>
+                    <input type="button" value="등록">
+                </div>
+            </div>
+            `;
+        } else if(datas == "change") {
+            temp = `
+                <div class="input_form">
+                    <div class="market_name">
+                        <div>
+                            Goods on sale :
+                            <input type="text" id="name_da">
+                        </div>
+                        <div>
+                            Ethereum Price Change :
+                            <input type="text" id="eths">
+                        </div>
+                        <div>
+                            DoBuyToken Price Change :
+                            <input type="text" id="dobuys">
+                        </div>
+                        <input type="button" onclick="Market.changePrice();" value="등록">
+                    </div>
+                </div>
+            `;
+        }
         
-    //     forms.append(temp);
-    // },
+        forms.append(temp);
+    },
+
+    changePrice: function() {
+        let name = $('#name_da').val();
+        let eth_pri = $('#eths').val();
+        let dobuy_pri = $('#dobuys').val();
+        let MarketNFTInstance;
+        Market.contracts.MarketNFT.deployed().then(function(instance) {
+            MarketNFTInstance = instance;
+            return MarketNFTInstance.changePrice(name, eth_pri, Number(dobuy_pri));
+        }).then(function() {
+            Market.init();
+        });
+    },
+
+    upload() {
+        const imageInput = $('#imageInput')[0];
+        console.log("imageInput: ", imageInput.files);
+
+        if(imageInput.files.length === 0) {
+            alert("파일은 선택해주세요");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("image", imageInput.files[0]);
+
+        // $.ajax({
+        //     type: "POST",
+        //     url: "../images/",
+        //     processData: false,
+        //     contentType: false,
+        //     data: formData,
+        //     success: function(rtn) {
+        //         const message = rtn.data.values[0];
+        //         console.log("message : ", message);
+        //         $("#resultUploadPath").text(message.uploadFilePath);
+        //     },
+        //     err: function(err) {
+        //         console.log("err: ", err);
+        //     }
+        // })
+
+    //     let storage = multer.diskStorage({
+    //         destination: function (req, file, cb) {
+    //           cb(null, "/public/images/");
+    //         },
+    //         filename: function (req, file, cb) {
+    //           const ext = path.extname(file.originalname);
+    //           cb(null, path.basename(file.originalname, ext) + "-" + Date.now() + ext);
+    //         },
+    //     });
+    //    var upload = multer({ storage: storage });
+
+    //     axios.post('/', formData, config).then((response) => {
+    //         if (response.data.success) {
+    //           // 작업 성공시 로직 
+    //           console.log(response.data);
+    //         } else {
+    //           alert('파일을 저장하는데 실패했습니다.');
+    //         }
+    //     });
+
+    }
 
 };
 
