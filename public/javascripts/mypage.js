@@ -47,16 +47,20 @@ MyPage = {
         web3.eth.getCoinbase(function(err, account) {
             if (err === null) {
                 MyPage.account = account;
-            //   $("#accountAddress").html("Your Account: " + account);
+                //   $("#accountAddress").html("Your Account: " + account);
             }
         });
+        let getLists = $('.getLists');
+        let getTracking = $('.getTracking');
+        getLists.css("width", "42%");
+        getTracking.css("width", "42%");
         let MarketNFTInstance;
         MyPage.contracts.MarketNFT.deployed().then(function(instance) {
             MarketNFTInstance = instance;
             return MarketNFTInstance._tokenIds();
         }).then(async function(Ids) {
-            let getLists = $('.getLists');
             let temp;
+            let flag = 0;
             for(let i = 0; i <= Ids; i++) {
                 let address1 = await MarketNFTInstance._DoBuyToOwner(i);
                 if(address1 == web3.eth.accounts[0]){
@@ -70,17 +74,18 @@ MyPage = {
                         </div>
                     `;
                     await getLists.append(temp);
+                    flag = 1;
                 } else {
                     continue;
                 }
             }
+            if(flag == 0) await getLists.append("보유중인 NFT가 없습니다.");
         });
         let TokenInstance;
         MyPage.contracts.DoBuyToken.deployed().then(async function(instance){
             TokenInstance = instance;
             let billLength = Number(await TokenInstance._trackingIds());
             console.log(web3.eth.accounts[0]);
-            let getTracking = $('.getTracking');
             let temp;
             for(let i = 0; i <= billLength; i++) {
                 let address2 = await TokenInstance._billToOwner(i);
@@ -93,7 +98,7 @@ MyPage = {
                             <p><span>상품명</span> ${bill[2]}</p>
                             <p><span>발송인</span> ${bill[3]}</p>
                             <p><span>수령인</span> ${bill[4]}</p>
-                            <button class="btn_base info_btn" onclick="MyPage.viewTracking(${bill[0]}, '${bill[5]}')">배송조회</button>
+                            <button class="btn_base info_btn" onclick="MyPage.viewTracking(${bill[0]})">배송조회</button>
                             <hr/>
                         </div>
                     `;
@@ -108,6 +113,8 @@ MyPage = {
     reqDeliver: async function(id, name, image_url) {
         let getLists = $(".getLists");
         let getTracking = $(".getTracking");
+        getLists.css("width", "94%");
+        // getTracking.css("width", "94%");
         let temp = `
             <div class="req_deliver">
                 <div>${id}</div>
@@ -141,14 +148,114 @@ MyPage = {
                 let track = await TokenInstance._trackingArray(Number(bill[0]),0);
                 //운송장, 배송 추적 정보
                 let temp = `
-                    <div class="delivery_bill">
-                        <p><span>운송장번호</span> ${bill[0]}</p>
-                        <p><span>상품명</span> ${bill[2]}</p>
-                        <p><span>발송인</span> ${bill[3]}</p>
-                        <p><span>수령인</span> ${bill[4]}</p>
-                        <p><span>배송지</span> ${destination}</p>
+                    <div class="delivery_bill_view">
+                        <table class="view_table bill_info">
+                            <thead>
+                                <tr>
+                                    <th>운송장번호</th>
+                                    <th>상품명</th>
+                                    <th>보내는 사람</th>
+                                    <th>받는 사람</th>
+                                    <th>배송예정지</th>
+                                    <th>수량</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>${bill[0]}</td>
+                                    <td>${bill[2]}</td>
+                                    <td>${bill[3]}</td>
+                                    <td>${bill[4]}</td>
+                                    <td>${destination}</td>
+                                    <td>${bill[1]}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <table class="tracking_info">
+                    <div class="delivery_tracking_view">
+                        <table class="view_table tracking_info">
+                            <thead>
+                                <tr>
+                                    <th>단계</th>
+                                    <th>처리</th>
+                                    <th>담당 점소</th>
+                                </tr>
+                            </thead>
+                            <tbody id="status_detail">
+                                <tr>
+                                    <td>${track[2]}</td>
+                                    <td>${MyPage.Unix_timestamp(track[0])}</td>
+                                    <td>${track[1]}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button class="btn_base to_my_btn" onclick="location.href='/mypage'">마이페이지로</button>
+                `
+                let getLists = $(".getLists");
+                await getLists.empty();
+                await getLists.append(temp);
+            })
+        })
+    },
+
+    viewTracking: function(_trackingId) {
+        const min = 60;
+        let getLists = $('.getLists');
+        let getTracking = $('.getTracking');
+        getLists.css("width", "94%");
+        getTracking.css("width", "94%");
+        let TokenInstance;
+        MyPage.contracts.DoBuyToken.deployed().then(async function(instance) {
+            TokenInstance = instance;
+            let bill = await TokenInstance._billArray(Number(_trackingId));
+            let createdAt = await TokenInstance._trackingArray(Number(_trackingId), 0);
+            let now = +new Date()/1000;
+            createdAt = Number(createdAt[0]);
+            
+            var currentTrackLength = 1;
+            if(createdAt + 5*min <= now && now < createdAt + 10*min) {
+                currentTrackLength = 2;
+            } else if (createdAt + 10*min <= now && now < createdAt + 15*min) {
+                currentTrackLength = 3;
+            } else if (createdAt + 15*min <= now) {
+                currentTrackLength = 4;
+            }
+
+            getLists.empty();
+            getTracking.empty();
+
+            let listTmp = `
+                <div class="delivery_bill_view">
+                    <h2>조회 결과</h2>
+                    <table class="view_table bill_info">
+                        <thead>
+                            <tr>
+                                <th>운송장번호</th>
+                                <th>상품명</th>
+                                <th>보내는 사람</th>
+                                <th>받는 사람</th>
+                                <th>수량</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>${bill[0]}</td>
+                                <td>${bill[2]}</td>
+                                <td>${bill[3]}</td>
+                                <td>${bill[4]}</td>
+                                <td>${bill[1]}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            getLists.append(listTmp);
+            let track = await TokenInstance._trackingArray(Number(_trackingId), 0);
+            let trackTmp = `
+                <div class="delivery_tracking_view">
+                    <h2>상품 상태 확인</h2>
+                    <table class="view_table tracking_info">
                         <thead>
                             <tr>
                                 <th>단계</th>
@@ -159,71 +266,18 @@ MyPage = {
                         <tbody id="status_detail">
                             <tr>
                                 <td>${track[2]}</td>
-                                <td>${track[0]}</td>
+                                <td>${MyPage.Unix_timestamp(track[0])}</td>
                                 <td>${track[1]}</td>
                             </tr>
-                        </tbody>
-                    </table>
-                    <button class="btn_base to_my_btn" onclick="location.href='/mypage'">마이페이지로</button>
-                `
-                let getLists = $(".getLists");
-                await getLists.empty();
-                await getLists.append(temp);
-                // await TokenInstance.deliveryUpdate(Number(bill[0]), destination);
-            })
-        })
-    },
-
-    viewTracking: function(_trackingId, destination) {
-        let TokenInstance;
-        MyPage.contracts.DoBuyToken.deployed().then(async function(instance) {
-            TokenInstance = instance;
-            let bill = await TokenInstance._billArray(Number(_trackingId));
-            let trackLength = await TokenInstance.getTrackingArrLength(Number(_trackingId));
-            console.log("tracklength", Number(trackLength));
-            // let track = [];
-            //     track.push(await TokenInstance._trackingArray(Number(_trackingId), i));
-            // await TokenInstance.deliveryUpdate(Number(_trackingId), destination);
-            
-            let getLists = $('.getLists');
-            let getTracking = $('.getTracking');
-            getLists.empty();
-            getTracking.empty();
-
-            let listTmp = `
-                <div class="delivery_bill">
-                    <p><span>운송장번호</span> ${bill[0]}</p>
-                    <p><span>상품명</span> ${bill[2]}</p>
-                    <p><span>발송인</span> ${bill[3]}</p>
-                    <p><span>수령인</span> ${bill[4]}</p>
-                </div>
             `;
-            getLists.append(listTmp);
-            let track = await TokenInstance._trackingArray(Number(_trackingId), 0);
-            let trackTmp = `
-                <table class="tracking_info">
-                    <thead>
-                        <tr>
-                            <th>단계</th>
-                            <th>처리</th>
-                            <th>담당 점소</th>
-                        </tr>
-                    </thead>
-                    <tbody id="status_detail">
-                        <tr>
-                            <td>${track[2]}</td>
-                            <td>${track[0]}</td>
-                            <td>${track[1]}</td>
-                        </tr>
-            `;
-            for(let i = 1; i < trackLength; i++) {
-                let track = await TokenInstance._trackingArray(Number(_trackingId), i);
+            for(let i = 1; i < currentTrackLength; i++) {
+                track = await TokenInstance._trackingArray(Number(_trackingId), i);
                 trackTmp = trackTmp + `
-                        <tr>
-                            <td>${track[2]}</td>
-                            <td>${track[0]}</td>
-                            <td>${track[1]}</td>
-                        </tr>
+                            <tr>
+                                <td>${track[2]}</td>
+                                <td>${MyPage.Unix_timestamp(track[0])}</td>
+                                <td>${track[1]}</td>
+                            </tr>
                 `;
             }
             await getTracking.append(trackTmp);
@@ -231,12 +285,24 @@ MyPage = {
         }).then(function() {
             let getTracking = $('.getTracking');
             let trackTmp = `
-                        <button class="btn_base to_my_btn" onclick="location.href='/mypage'">마이페이지로</button>
-                    </tbody>
-                </table>
+                            <button class="btn_base to_my_btn" onclick="location.href='/mypage'">마이페이지로</button>
+                        </tbody>
+                    </table>
+                </div>
             `;
             getTracking.append(trackTmp);
         })
+    },
+
+    Unix_timestamp: function(t){
+        var date = new Date(t*1000);
+        var year = date.getFullYear();
+        var month = "0" + (date.getMonth()+1);
+        var day = "0" + date.getDate();
+        var hour = "0" + date.getHours();
+        var minute = "0" + date.getMinutes();
+        var second = "0" + date.getSeconds();
+        return year + "-" + month.substr(-2) + "-" + day.substr(-2) + " " + hour.substr(-2) + ":" + minute.substr(-2) + ":" + second.substr(-2);
     }
 };
 
