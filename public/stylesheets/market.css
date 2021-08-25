@@ -148,18 +148,35 @@
 .admin_button {
     padding: 5px 5px;
     border-radius: 10px 10px;
+    border: none;
+    box-shadow: 0 2px 3px black;
+    background: #2baaff;
+    color: #fff;
 }
 .admin_button2 {
     padding: 5px 5px;
     border-radius: 10px 10px;
+    border: none;
+    box-shadow: 0 2px 3px black;
+    background: #2baaff;
+    color: #fff;
 }
 .admin_button3 {
     padding: 5px 5px;
     border-radius: 10px 10px;
+    border: none;
+    box-shadow: 0 2px 3px black;
+    background: #2baaff;
+    color: #fff;
 }
 .admin_button:hover,
-.admin_button2:hover {
-    background: #999494;
+.admin_button2:hover,
+.admin_button3:hover {
+    background: #1f61ee;
+    cursor: pointer;
+    transition: 0.3s;
+    transform: translateY(-3px);
+    color: #fff;
 }
 .input_form {
     margin-left: 20px;
@@ -168,11 +185,6 @@
     width: 600px;
     padding: 10px 10px;
 }
-
-
-
-
-
 
 .container_under {
     font-weight: bolder;

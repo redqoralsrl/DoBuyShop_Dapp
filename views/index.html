@@ -7,6 +7,17 @@
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
   <link rel='stylesheet' href='/stylesheets/title.css' />
+      <!-- Slick Slider -->
+      <link rel="stylesheet" href="javascripts/slick/slick-theme.css">
+      <link rel="stylesheet" href="javascripts/slick/slick.css">
+      <script src="/javascripts/slick/slick.min.js"></script>
+  <!-- wow scroll -->
+  <script src="/javascripts/wow.min.js"></script>
+      <!-- TypeIt -->
+  <script src="/javascripts/typeit.min.js"></script>
+  <!-- custom CSS & JS -->
+  <link rel="stylesheet" href="/stylesheets/responsive.css">
+  <script src="/javascripts/custom.js"></script>
 </head>
 
 <body>
@@ -19,7 +30,7 @@
             </a>
         </div>
         <ul class="navbar_menu">
-            <li><a href="/">Staking</a></li>
+            <li><a href="/">Swap</a></li>
             <li><a href="/market">NFT Market</a></li>
             <li><a href="/">NFT Trade</a></li>
             <li><a href="/mypage">My Page</a></li>
@@ -30,6 +41,270 @@
       </div>
     </div>
 
+    <!-- <div class="start_main">
+      <div class="container_box">
+        <div class="left_main">
+          <div class="left_boxs">
+            <h1>World's Best Market</h1>
+            <span>Start trading in the best market in the world.</span>
+          </div>
+          <div class="right_boxs">
+            <img src="/images/blocks.jpg" style="width: 500px; height: 500px;">
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+
+  <div class="container">
+      <!-- Header Start -->
+    <!-- <header>
+        <div class="header-inner">
+            <div class="logo">
+                <a href="#"><img src="images/logo.png"></a>
+            </div>
+            <div class="gnb">
+                <a href="#feature1">CEO 인사말</a>
+                <a href="#feature2">서비스 특징</a>
+                <a href="#feature3">경영비전</a>
+                <a href="#feature4">자주 묻는 질문들</a>
+                <a href="#feature5">사용자 리뷰</a>
+                <a href="#feature6">앱 사용자 가이드</a>
+                <a href="#feature7">최신소식</a>
+            </div>
+        </div>
+        <div class="trigger"></div>
+    </header> -->
+    <!-- welcome Start -->
+    <section class="welcome">
+        <div class="slideshow">
+            <img src="images/slide-welcomes-01.png">
+            <img src="images/slide-welcomes-02.png">
+            <img src="images/slide-welcome-03.png">
+        </div>
+        <div class="welcome-heading">
+            <span>
+                미래의 투자 DoBuy Shop
+            </span>
+            <h1>
+              Without investment, there is no growth
+                <em id="typing"></em>
+                <!-- Jquery 정책으로 class 는 사용 불능 -->
+            </h1>
+            <p style="font-weight: bold;">
+                국내 최고의 NFT마켓인 DoBuy가 여러분의 창의적인 아이디어를 가치있는 자산으로 만들어드리겠습니다. 
+            </p>
+            <div class="welcome-btns">
+                <a href="/market" class="btn start">NFT 거래 시작하기</a>
+                <a href="#none" class="btn guide">사용자 가이드</a>
+            </div>
+        </div>
+        <div class="mause">
+            <span class="wheele"></span>
+        </div>
+    </section>
+    <!-- ceo-access Start -->
+    <section class="ceo-access" id="feature1">
+        <div class="ceo-inner">
+            <div class="ceo-content">
+                <div class="ceo-left ltr wow">
+                    <img src="images/quotation-mark.svg">
+                    <h3>DoBuy Shop만의 다짐</h3>
+                    <p>여러분의 한정판 물품, 창작 예술품, 보유하신 자산 등을 최고의 가격으로 거래하게 해드립니다! NFT로 거래를 지금 시작하세요!</p>
+                    <span>- DoBuy 개발자 올림</span>
+                </div>
+                <div class="ceo-right rtl wow">
+                    <div class="ceo-msg">
+                        <h3>User Transaction<big>30,000+</big></h3>
+                        <p>NFT 하루 1,000개 거래량 달성! 여러분의 성원에 감사드립니다. Achieve 1,000 NFT transactions per day! Thank you for your support.</p>
+                    </div>
+                    <div class="ceo-photo">
+                        <img src="images/cards.jpg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- banner Start -->
+    <section class="banner">
+        <div class="banner-inner">
+            <div class="banner-content">
+                <input type="radio" name="tabmenu" id="tab1" checked>
+                <input type="radio" name="tabmenu" id="tab2">
+                <input type="radio" name="tabmenu" id="tab3">
+                <div class="tab-btn">
+                    <label for="tab1">
+                        <em><img src="images/banner-icon-01.png"></em>
+                        <span>ERC-721 Token</span>
+                    </label>
+                    <label for="tab2">
+                        <em><img src="images/banner-icon-02.png"></em>
+                        <span>ERC-20</span>    
+                    </label>
+                    <label for="tab3" class="tab3">
+                        <em><img src="images/banner-icon-03.png"></em>
+                        <span>Trade</span>
+                    </label>
+                </div>
+                <div class="tabs">
+                    <div class="tab tab1">
+                        <h2>A Safe Asset</h2>
+                        <p>대체 불가능한 토큰으로 자산을 관리하세요.</p>
+                    </div>
+                    <div class="tab tab2">
+                        <h2>Safe Transaction</h2>
+                        <p>ERC-20기반으로 배송정보 및 조회를 안전하게하세요.</p>  
+                    </div>
+                    <div class="tab tab3">
+                        <h2>Community Shop & Trade</h2>
+                        <p>개인과 개인의 안전한 거래를 하고 이더리움으로 토큰을 교환하세요.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- feature Start -->
+    <section class="feature" id="feature2">
+        <div class="feature-inner">
+            <div class="headline-share">
+                <h1>DoBuyShop만의 장점</h1>
+                <p>탈중앙화 NFT거래소로 모두 이더리움 및 토큰 기반으로 작동합니다.</p>
+            </div>
+            <div class="feature-content">
+                <div class="feature-mockup ltr wow">
+                    <img src="images/feature-mockup-01.png" >
+                </div>
+                <div class="feature-about rtl wow">
+                    <img src="images/icon-num-01.png" >
+                    <h2>안전한 Swap 기능</h2>
+                    <p>이더리움에서 저희만의 DoBuyToken으로 안전하게 스왑하세요. 안전한 메타마스크로 작동하며 빠른 거래를 자랑합니다.</p>
+                </div>
+            </div>
+            <div class="feature-content flex-order">
+                <div class="feature-about ltr wow">
+                    <img src="images/icon-num-02.png" >
+                    <h2>NFT 마켓 및 개인 간에 안전한 구매</h2>
+                    <p>DoBuy물건을 직접 사거나 개인 간에 한정품, 예술품을 사용하여 거래를 시작하세요.</p>
+                </div>
+                <div class="feature-mockup rtl wow">
+                    <img src="images/feature-mockup-02.png" >
+                </div>
+            </div>
+            <div class="feature-content">
+                <div class="feature-mockup ltr wow">
+                    <img src="images/feature-mockup-03.png" >
+                </div>
+                <div class="feature-about rtl wow">
+                    <img src="images/icon-num-03.png" >
+                    <h2>블록체인으로 배송정보 및 조회</h2>
+                    <p>배송정보를 블록체인에 담고 안전한 물품을 받으세요.</p>
+                </div>
+            </div>
+        </div>
+    </section>ㅅ
+    <!-- faq Start -->
+    <section class="faq" id="feature4">
+        <div class="faq-inner">
+            <div class="headline-share">
+                <h1>서비스 이용이 궁금하신가요?</h1>
+                <p>DoBuy가 도와드리겠습니다.</p>
+            </div>
+            <div class="faq-content">
+                <div class="faq-accordion ltr wow">
+                    <div class="faq-item active">
+                        <div class="faq-title">DoBuy 회원가입이 필수인가요?</div>
+                        <div class="faq-desc">아니요. 메타마스크로 이용가능합니다. <br> 
+                            메타마스크가 설치된 크롬, 파이어폭스 브라우저만 지원합니다.
+                            메타마스크가 필수적으로 설치되어 있어야 합니다. <br><br>
+                            안전한 거래와 자산 보호를 위하여 메타마스크를 설치해주시지 <br>
+                            않으면 저희 사이트를 이용하실 수가 없습니다. <br><br>
+                            <a id="tagss" href="https://metamask.io/">메타마스크 설치하러가기</a>
+                          </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-title">DoBuy토큰은 어떻게 얻나요?</div>
+                        <div class="faq-desc">DoBuy토큰은 이더리움만 보유하고 계시면 <br>
+                            스왑을 통하여 획득하실 수 있습니다. 저렴한 DoBuy토큰으로 <br>
+                            바꾸시고 저희 NFT 마켓을 이용해주세요.<br><br>
+                            <a id="tagss" href="/swap">스왑하러가기</a>
+                          </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-title">개인정보 관리를 어떻게 하시나요?</div>
+                        <div class="faq-desc">DoBuyToken에 정보를 암호화하여 저장하게 됩니다.
+                          안전한 블록체인에 넣어 검증 및 보장을 받으세요. 상호 간에 검증한 정보외에는 허용을 하지 않습니다.
+
+                            </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-title">배송 후에 물품이 불량이면 어떡하죠?</div>
+                        <div class="faq-desc">DoBuy Shop의 물건은 검수 후 보내드립니다. 하지만 개인간 거래는 물품 불량 및 도난의 경우에는
+                          블록체인으로 역으로 추적 후 조사할 수 있습니다. 안전한 거래를 DoBuy Shop에서 하세요.
+                        </div>
+                    </div>
+                    <!-- <div class="faq-item">
+                        <div class="faq-title">회원탈퇴 후 같은 아이디로 재가입 가능한가요?</div>
+                        <div class="faq-desc">스타트업메이트 회원 탈퇴를 원하시나요?
+                            동일 아이디는 스타트업 메이트 회원 정책에 따라 재가입이 일정 기간 불가합니다. <br> 회원 탈퇴 시 기존 회원 정보를 포함한 모든 정보가 복구 불가능합니다. <br>
+                            탈퇴 시 이 점을 다시 한번 고려하신 후 진행해 주세요.
+                            항상 최선을 다하는 스타트업메이트가 되겠습니다. 감사합니다.</div>
+                    </div> -->
+                </div>
+                <div class="awards-content rtl wow">
+                    <div class="award-image">
+                        <img src="/images/nftimages.jpg" >
+                    </div>
+                    <h2>the best store exchange in the country</h2>
+                    <p>국내 최고의 NFT거래소가 당신의 자산을 가치있게 만들어드립니다. 거래를 시작해보세요.</p>
+                    <!-- <a href="#none" class="btn-awards">view the awards</a> -->
+                </div>
+            </div>
+        </div>
+        
+    </section>
+    <!-- footer Start -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <!-- <img src="images/logo.png"> -->
+                </div>
+                <div class="copyright">
+                    <div class="policy-sns">
+                        <div class="policy">
+                            <span>
+                                <a href="#none">개인정보취급방침</a>
+                                <em>|</em>
+                                <a href="#none">이용약관</a>
+                            </span>
+                            <span>Copyright STARTUP MATE. All right reserved.</span>
+                        </div>
+                        <div class="sns">
+                            <a href="#none"><i class="xi-facebook-official"></i></a>
+                            <a href="#none"><i class="xi-instagram"></i></a>
+                            <a href="#none"><i class="xi-kakaostory"></i></a>
+                            <a href="#none"><i class="xi-naver-square"></i></a>
+                            <a href="#none"><i class="xi-youtube-play"></i></a>
+                        </div>
+                    </div>
+                    <div class="address">
+                        <span>(주)DoBuy Shop | 대표자 : O O O | 사업자번호 : 123-5-67890 사업자 정보 확인 | 개인정보보호책임자 : O O O</span>
+                        <span>주소 : 서울특별시 강동구 천호동 ㅣ 이메일: O O O @ gmail.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+<!-- Go to Top -->
+<a href="#" class="btn-top"><i class="xi-angle-up-thin"></i></a>
+<!-- Video Modal -->
+<div class="video-modal">
+    <i class="xi-close-thin close-modal"></i>
+    <div class="video-content">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/3K6uDWa2aRw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</div>
   
 </body>
 <script src="/javascripts/title.js"></script>

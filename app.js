@@ -46,54 +46,40 @@ app.get('/mypage', function(req, res, next) {
 });
 
 app.post('/upload', function(req, res, next) {
-  // var form = new multiparty.Form({
-  //   autoFiles: false, // 요청이 들어오면 파일을 자동으로 저장할 것인가
-  //   uploadDir: 'public/images/', // 파일이 저장되는 경로(프로젝트 내의 temp 폴더에 저장됩니다.)
-  //   maxFilesSize: 1024 * 1024 * 5 // 허용 파일 사이즈 최대치
-  // });
+  var form = new multiparty.Form();
+  form.on('field', function(name, value){
+    console.log(name, ' : ', value);
+  });
+  form.on('part', function(part) {
+    var filename;
+    var size;
+    if(part.filename) {
+      filename = part.filename;
+      size = part.size;
+    }else {
+      part.resume();
+    }
 
-  // form.parse(req, function (error, fields, files) {
-  //   // 파일 전송이 요청되면 이곳으로 온다.
-  //   // 에러와 필드 정보, 파일 객체가 넘어온다.
-  //   var path = files.fileInput[0].path;
-  //   console.log(path);
-  //   res.send(path); // 파일과 예외 처리를 한 뒤 브라우저로 응답해준다.
-  // });
-  /////////////
-  // var form = new multiparty.Form();
-  // form.on('field', function(name, value){
-  //   console.log(name, ' : ', value);
-  // });
-  // form.on('part', function(part) {
-  //   var filename;
-  //   var size;
-  //   if(part.filename) {
-  //     filename = part.filename;
-  //     size = part.size;
-  //   }else {
-  //     part.resume();
-  //   }
+    console.log("Write Streaming file : " + filename);
+    var writeStream = fs.createWriteStream('public/images/'+filename);
+    writeStream.filename = filename;
+    part.pipe(writeStream);
 
-  //   console.log("Write Streaming file : " + filename);
-  //   var writeStream = fs.createWriteStream('/public/images/'+filename);
-  //   writeStream.filename = filename;
-  //   part.pipe(writeStream);
-
-  //   part.on('data',function(chunk){
-  //     console.log(filename+' read '+chunk.length + 'bytes');
-  //   });
-  //   part.on('end',function(){
-  //         console.log(filename+' Part read complete');
-  //         writeStream.end();
-  //   });
-  // });
-  // form.on('close',function(){
-  //   res.status(200).send('Upload complete');
-  // });
-  // form.on('progress',function(byteRead,byteExpected){
-  //   console.log(' Reading total  '+byteRead+'/'+byteExpected);
-  // });
-  // form.parse(req);
+    part.on('data',function(chunk){
+      console.log(filename+' read '+chunk.length + 'bytes');
+    });
+    part.on('end',function(){
+          console.log(filename+' Part read complete');
+          writeStream.end();
+    });
+  });
+  form.on('close',function(){
+    res.status(200).send('Upload complete');
+  });
+  form.on('progress',function(byteRead,byteExpected){
+    console.log(' Reading total  '+byteRead+'/'+byteExpected);
+  });
+  form.parse(req);
 });
 
 // catch 404 and forward to error handler

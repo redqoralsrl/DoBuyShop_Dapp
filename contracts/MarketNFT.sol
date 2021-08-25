@@ -47,6 +47,16 @@ contract MarketNFT is DoBuyNFT, Ownable {
         _MarketIds++;
         _MarketList[_MarketIds] = MarketList(_MarketIds, "0.08", 8000, "Descente", "dessa.png");
         _MarketIds++;
+        _MarketList[_MarketIds] = MarketList(_MarketIds, "2", 200000, "RollsUmbrella", "rose.png");
+        _MarketIds++;
+        _MarketList[_MarketIds] = MarketList(_MarketIds, "30", 3000000, "GucciBag", "gucci.jpg");
+        _MarketIds++;
+        _MarketList[_MarketIds] = MarketList(_MarketIds, "0.4", 400000, "Razer", "razer.jpg");
+        _MarketIds++;
+        _MarketList[_MarketIds] = MarketList(_MarketIds, "0.2", 200000, "MacBook", "notebook.jpg");
+        _MarketIds++;
+        _MarketList[_MarketIds] = MarketList(_MarketIds, "0.15", 150000, "Ipad", "ipad.jpg");
+        _MarketIds++;
         _MarketList[_MarketIds] = MarketList(_MarketIds, "0.012", 1200, "Potato", "potato.jpg");
         _MarketIds++;
         _MarketList[_MarketIds] = MarketList(_MarketIds, "0.025", 2500, "Banana", "banana.jpg");
