@@ -32,7 +32,6 @@ contract DoBuyToken is ERC20 {
     /// @notice 운송장번호
     // Counters.Counter public _trackingIds;
     uint256 public _trackingIds;
-    uint256 public dd;
 
     /// @dev 운송장 정보
     struct deliveryBill {
@@ -57,10 +56,13 @@ contract DoBuyToken is ERC20 {
     string[4] public location = ["Gimpo", "Gonjiam", "Icheon", "Gwangju"];
 
     // 운송장 배열
-    mapping (uint256 => deliveryBill) public billArray;
+    mapping (uint256 => deliveryBill) public _billArray;
+
+    // 운송장번호 - owner 매칭
+    mapping (uint256 => address) public _billToOwner;
 
     // 배송추적 리스트 배열 : trackingId 로 매칭. deliveryTracking 구조체를 여러줄 담고 있는 trackingArray가 value
-    mapping (uint256 => deliveryTracking[]) public trackingArray;
+    mapping (uint256 => deliveryTracking[]) public _trackingArray;
 
     constructor() ERC20("DoBuyToken", "DBT") {
         owners = payable(msg.sender);
@@ -76,8 +78,9 @@ contract DoBuyToken is ERC20 {
     function deliveryStart(string memory _name, string memory _receiver, uint16 _amount) public returns (uint256){
         // _trackingIds.increment();
         _trackingIds++;
-        billArray[_trackingIds] = deliveryBill(_trackingIds, _amount, _name, "DoBuy Market", _receiver);
-        trackingArray[_trackingIds].push(deliveryTracking(block.timestamp, "geumbok building", "Start Delivery"));
+        _billArray[_trackingIds] = deliveryBill(_trackingIds, _amount, _name, "DoBuy Market", _receiver);
+        _billToOwner[_trackingIds] = msg.sender;
+        _trackingArray[_trackingIds].push(deliveryTracking(block.timestamp, "geumbok building", "Start Delivery"));
         return _trackingIds;
     }
     /**
@@ -87,16 +90,16 @@ contract DoBuyToken is ERC20 {
     */
     function deliveryUpdate(uint256 _Ids, string memory _dest) public {
         //가장 최근 trackinglist의 timestamp
-        uint256 listlength = trackingArray[_Ids].length;
-        uint256 lastTime = trackingArray[_Ids][listlength].timestamp;
+        uint256 listlength = _trackingArray[_Ids].length;
+        uint256 lastTime = _trackingArray[_Ids][listlength].timestamp;
         bool completed = false;
         uint256 userDeliveryNum = uint256(keccak256(abi.encodePacked(msg.sender))) % 4;
         if (lastTime + 1 hours <= block.timestamp && block.timestamp < lastTime + 2 hours) {
-            trackingArray[_Ids].push(deliveryTracking(block.timestamp, location[userDeliveryNum], "Delivering"));
+            _trackingArray[_Ids].push(deliveryTracking(block.timestamp, location[userDeliveryNum], "Delivering"));
         } else if (lastTime + 2 hours <= block.timestamp && block.timestamp < lastTime + 3 hours) {
-            trackingArray[_Ids].push(deliveryTracking(block.timestamp, location[(userDeliveryNum + 1) % 4], "Delivering"));
+            _trackingArray[_Ids].push(deliveryTracking(block.timestamp, location[(userDeliveryNum + 1) % 4], "Delivering"));
         } else if (lastTime + 3 hours <= block.timestamp) {
-            trackingArray[_Ids].push(deliveryTracking(block.timestamp, _dest, "Delivery Completed"));
+            _trackingArray[_Ids].push(deliveryTracking(block.timestamp, _dest, "Delivery Completed"));
             completed = true;
         }
     }
