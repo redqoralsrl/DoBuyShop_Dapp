@@ -40,6 +40,7 @@ contract DoBuyToken is ERC20 {
         string name;
         string sender;
         string receiver;
+        string destination;
     }
 
     /// @dev 배송추적 정보 (한 행)
@@ -75,12 +76,16 @@ contract DoBuyToken is ERC20 {
     * @param _receiver 구매자 이름
     * @param _amount 수량
      */
-    function deliveryStart(string memory _name, string memory _receiver, uint16 _amount) public returns (uint256){
+    function deliveryStart(string memory _name, string memory _receiver, uint16 _amount, string memory _dest) public returns (uint256){
+        uint256 userDeliveryNum = uint256(keccak256(abi.encodePacked(msg.sender))) % 4;
         // _trackingIds.increment();
         _trackingIds++;
-        _billArray[_trackingIds] = deliveryBill(_trackingIds, _amount, _name, "DoBuy Market", _receiver);
+        _billArray[_trackingIds] = deliveryBill(_trackingIds, _amount, _name, "DoBuy Market", _receiver, _dest);
         _billToOwner[_trackingIds] = msg.sender;
         _trackingArray[_trackingIds].push(deliveryTracking(block.timestamp, "geumbok building", "Start Delivery"));
+        _trackingArray[_trackingIds].push(deliveryTracking(block.timestamp + 1 minutes, location[userDeliveryNum], "Delivering"));
+        _trackingArray[_trackingIds].push(deliveryTracking(block.timestamp + 2 minutes, location[(userDeliveryNum + 1) % 4], "Delivering"));
+        _trackingArray[_trackingIds].push(deliveryTracking(block.timestamp + 3 minutes, _dest, "Delivery Completed"));
         return _trackingIds;
     }
     /**
@@ -88,29 +93,52 @@ contract DoBuyToken is ERC20 {
     *      setInterval로 검사할 거 아니면 block.timestamp 검사해서 단계별로 찍히게 하기
     * @param _Ids 운송장번호(_trackingIds)
     */
-    function deliveryUpdate(uint256 _Ids, string memory _dest) public {
-        //가장 최근 trackinglist의 timestamp
-        uint256 listlength = _trackingArray[_Ids].length;
-        uint256 lastTime = _trackingArray[_Ids][listlength].timestamp;
-        bool completed = false;
-        uint256 userDeliveryNum = uint256(keccak256(abi.encodePacked(msg.sender))) % 4;
-        if (lastTime + 1 hours <= block.timestamp && block.timestamp < lastTime + 2 hours) {
-            _trackingArray[_Ids].push(deliveryTracking(block.timestamp, location[userDeliveryNum], "Delivering"));
-        } else if (lastTime + 2 hours <= block.timestamp && block.timestamp < lastTime + 3 hours) {
-            _trackingArray[_Ids].push(deliveryTracking(block.timestamp, location[(userDeliveryNum + 1) % 4], "Delivering"));
-        } else if (lastTime + 3 hours <= block.timestamp) {
-            _trackingArray[_Ids].push(deliveryTracking(block.timestamp, _dest, "Delivery Completed"));
-            completed = true;
-        }
-    }
+    // function deliveryUpdate(uint256 _Ids, string memory _dest) public {
+    //     //가장 최근 trackinglist의 timestamp
+    //     uint256 listlength = _trackingArray[_Ids].length;
+    //     uint256 lastTime = _trackingArray[_Ids][listlength-1].timestamp;
+    //     bool completed = false;
+
+    //     if (lastTime + 1 minutes <= block.timestamp && block.timestamp < lastTime + 2 minutes) {
+    //         // _trackingArray[_Ids].push(deliveryTracking(block.timestamp, location[userDeliveryNum], "Delivering"));
+    //     } else if (lastTime + 2 minutes <= block.timestamp && block.timestamp < lastTime + 3 minutes) {
+    //         // _trackingArray[_Ids].push(deliveryTracking(block.timestamp, location[(userDeliveryNum + 1) % 4], "Delivering"));
+    //     } else if (lastTime + 3 minutes <= block.timestamp) {
+    //         // _trackingArray[_Ids].push(deliveryTracking(block.timestamp, _dest, "Delivery Completed"));
+    //         completed = true;
+    //     }
+    // }
 
     /**
-     * @dev MarketNFT구매시 DoBuyToken 차감시키는 함수
+     * @dev Ma-rketNFT구매시 DoBuyToken 차감시키는 함수
      * @param _amounts 해당 금액이 들어온다
      */
     function getOwnerToken(uint256 _amounts) payable public {
         uint256 prices = _amounts * 10 ** (uint(decimals()));
         require(balanceOf(msg.sender) >= prices);
         transfer(owners, prices);
+    }
+
+    /**
+     * @param _Ids 운송장번호
+     */
+    function getTrackingArrLength(uint256 _Ids) public view returns(uint256) {
+        // uint256 trackLength = _trackingArray[_Ids].length;
+        // return trackLength;
+        uint256 createdAt = _trackingArray[_Ids][0].timestamp;
+        uint256 currentTrackLength = 1;
+        if(createdAt + 1 minutes <= block.timestamp && block.timestamp < createdAt + 2 minutes) {
+            currentTrackLength = 2;
+        } else if (createdAt + 2 minutes <= block.timestamp && block.timestamp < createdAt + 3 minutes) {
+            currentTrackLength = 3;
+        } else if (createdAt + 3 minutes <= block.timestamp) {
+            currentTrackLength = 4;
+        }
+        return currentTrackLength;
+    }
+
+    function viewUpdate(uint256 _Ids) public view returns(uint256) {
+        uint256 listlength = _trackingArray[_Ids].length;
+        return _trackingArray[_Ids][listlength-1].timestamp;
     }
 }
