@@ -174,6 +174,7 @@ Market = {
             temp = `
             <div class="input_form">
                 <div class="market_name">
+                <form action="/upload" method="post" enctype="multipart/form-data" id="fileForm">
                     <div>
                         ETH 가격 :
                         <input type="text" id="struct_eth">
@@ -188,13 +189,10 @@ Market = {
                     </div>
                     <div>
                         사진 :
-                        <form id="uploadForm" enctype="multipart/form-data">
-                            <input type="file" id="imageInput" accept=".gif, .jpg, .png"/>
-                        </form>
-                        <button onclick="Market.upload()">upload</button>
-                        <p id="resultUploadPath"></p>
+                        <input type="file" name="fileInput" id="fileInput" accept=".gif, .jpg, .png"/>
                     </div>
-                    <input type="button" value="등록">
+                    <input type="button" onclick="Market.upload()" value="등록">
+                </form>
                 </div>
             </div>
             `;
@@ -258,7 +256,23 @@ Market = {
     },
 
     upload: function() {
-
+        var form = $('#fileForm')[0];
+        var formData = new FormData(form);
+     
+        $.ajax({
+            type: 'post',
+            url: '/upload',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                // $('#filePath').val(data);
+                location.reload();
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
     },
 
 };
