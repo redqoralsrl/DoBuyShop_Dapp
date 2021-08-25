@@ -100,9 +100,9 @@ Market = {
                 if(own_addresss == Market.account) {
                     let adm = $('.admins_btn');
                     let temp = `
-                        <button class="admin_button" onclick="Market.clicks('plus');">NFT 추가</button>
-                        <button class="admin_button2" onclick="Market.clicks('change');">가격변동</button>
-                        <button class="admin_button3" onclick="Market.clicks('del');">NFT 삭제</button>
+                        <button class="admin_button" id="admin1" onclick="Market.clicks('plus');">NFT 추가</button>
+                        <button class="admin_button2" id="admin2" onclick="Market.clicks('change');">가격변동</button>
+                        <button class="admin_button3" id="admin3" onclick="Market.clicks('del');">NFT 삭제</button>
                     `;
                     adm.append(temp);
                 }
@@ -242,7 +242,7 @@ Market = {
             MarketNFTInstance = instance;
             return MarketNFTInstance.changePrice(name, eth_pri, Number(dobuy_pri));
         }).then(function() {
-            Market.init();
+            location.reload();
         });
     },
 
@@ -258,6 +258,9 @@ Market = {
     upload: function() {
         var form = $('#fileForm')[0];
         var formData = new FormData(form);
+
+        var fileValue = $("#fileInput").val().split("\\");
+        var fileName = fileValue[fileValue.length-1];
      
         $.ajax({
             type: 'post',
@@ -266,8 +269,8 @@ Market = {
             processData: false,
             contentType: false,
             success: function (data) {
-                // $('#filePath').val(data);
-                location.reload();
+                // location.reload();
+                Market.plusNFT(fileName);
             },
             error: function (err) {
                 console.log(err);
@@ -275,10 +278,33 @@ Market = {
         });
     },
 
+    plusNFT: function(fileName) {
+        let MarketNFTInstance;
+        Market.contracts.MarketNFT.deployed().then(function(instance) {
+            MarketNFTInstance = instance;
+            let et = $('#struct_eth').val();
+            let dob = $('#struct_dobuy').val();
+            let na = $('#struct_name').val();
+            let picture = fileName;
+            console.log( et, dob, na, picture);
+            console.log(typeof et, typeof dob, typeof na, typeof picture);
+            return MarketNFTInstance.setMarketList(et, dob, na, picture);
+        }).then(function() {
+            location.reload();
+        });
+    }
+
 };
 
 $(function() {
     $(window).load(function() {
         Market.init();
     });
+
+    setInterval(function() {
+        // 계정이 바뀌었는지 확인
+        if (web3.eth.accounts[0] !== Market.account) {
+          location.reload();
+        }
+    }, 1000);
 });

@@ -244,4 +244,11 @@ $(function() {
     $(window).load(function() {
         MyPage.init();
     });
+
+    setInterval(function() {
+        // 계정이 바뀌었는지 확인
+        if (web3.eth.accounts[0] !== Market.account) {
+          location.reload();
+        }
+    }, 100);
 });

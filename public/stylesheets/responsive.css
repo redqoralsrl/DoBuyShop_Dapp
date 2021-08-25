@@ -1,0 +1,344 @@
+/* 모바일 사이즈보다 큰 너비 값이  있다면 모두 100%로 변경
+가로배치된 레이아웃을 세로 배치로 변경작업(float:none, width:100%)
+*/
+
+@media (max-width: 768px){
+    /* Dfault CSS */
+    body{
+        font-size: 16px;
+    }
+    section{
+        padding: 50px 15px;
+    }
+    /* Common CSS */
+    .headline-share h1 {
+        font-size: 28px;
+    }
+    .headline-share p {
+        padding: 0 20px;
+    }
+    /*######################## Header Start ########################*/
+    .header-inner{
+        width: 100%;
+    }
+    .logo{
+        float: right;
+        margin-right: 20px;
+    }
+    .gnb{
+        float: none;
+        background-color: #fff;
+        position: fixed;
+        height: 100vh;
+        width: 250px;
+        top: 0;
+        left: -270px;
+        box-shadow: 3px 0 3px rgba(0, 0, 0, 0.1);
+        padding-top: 70px;
+        padding-left: 15px;
+        transition: 0.5s;
+    }
+    .gnb.active{
+        left: 0;
+    }
+    .gnb a{
+        display: block;
+    }
+    /* Trigger */
+    .trigger{
+        
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        font-size: 28px;
+        text-align: center;
+    }
+    .trigger:before{
+        content:'\e91c';
+        font-family: xeicon;
+    }
+    .trigger.active:before{
+        content: '\e9af';
+    }
+    /*######################## welcome section Start ########################*/
+
+    .welcome{
+        background-color: #f9f9f9;
+    }
+    .slideshow{
+        display: none;
+    }
+    .welcome-heading{
+        width: 100%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+    .welcome-heading h1{
+        font-size: 40px;
+    }
+    .welcome-heading span{
+        font-size: 18px;
+    }
+    .welcome-heading p {
+        padding: 0 30px;
+    }
+    /* ############## Mause CSS in Welcome Section ################# */
+    .mause{
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    /* ########### CEO - Access Section ##################### */
+    .ceo-inner, .access-inner{
+        width: 100%;
+    }
+    .ceo-content > div{
+        float: none;
+        width: 100%;
+        text-align: center;
+    }
+    .ceo-right > div{
+        float: none;
+        width: 100%;
+    }
+    .ceo-left{
+        padding-right: 0;
+    }
+    .access-content > div{
+        float: none;
+        width: 100%;
+        text-align: center;
+    }
+    .access-left{
+        padding-right: 0px;
+        padding-top: 20px;
+    }
+    .access-left h2{
+        font-size: 28px;
+    }
+    .btn-download{
+        margin-bottom: 50px;
+    }
+    .btn-download img{
+        height: 50px;
+    }
+    .access-right img{
+        width: 100%;
+    }
+    /* #################section: banner ##################### */
+    .banner{
+        padding-top: 30px;
+        background: linear-gradient(to right, #69acfe, #6eaefd);
+    }
+    .banner-inner{
+        width: 100%;
+    }
+    .banner-content > div{
+        float: none;
+        width: 100%;
+    }
+    .tab-btn{
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .tab-btn label{
+        width: 27%;
+        border: 1px solid #6eaefd;
+        /* 이유는 모르겠는데 border 빼면 줄이 안 맞아서 넣음 */
+    }
+    .tab-btn label em{
+        width: 100px;
+        height: 100px;
+        padding-top: 15px;
+    }
+    .tab{
+        padding: 20px;
+        text-align: center;
+    }
+    .tab h2{
+        font-size: 26px;
+    }
+    .feature-about3{
+        
+    }
+    /* ########### Section : feature ############# */
+    .feature-inner{
+        width: 100%;
+    }
+
+    .feature-mockup img{
+        width: 100%;
+    }
+    .feature-content{
+        
+        margin: 50px 0;
+    
+    }
+    .feature-content > div{
+        width: 100%;
+        float: none;
+    }
+    .feature-about{
+        padding: 0 10px;
+        padding-top: 80px;
+    }
+    .feature-about h2{
+        /* font-weight: bold; */
+        font-size: 22px;
+        margin-top: 20px;
+    }
+    /* Change Order with Flex */
+    .feature-content.flex-order{
+        display: flex;
+        flex-direction: column;
+    }
+    .feature-content.flex-order > div:first-child{
+        order:1;
+    }
+    /* ################# Section : Vision ############## */
+    .vision{
+        padding-top: 0;
+    }
+    .vision-content > div{
+        /* border: 1px solid #000; */
+        float: none;
+        width: 100%;
+        height: auto;
+        
+    }
+    .vision-item-headline{
+        width: 80%;
+    }
+    .vision-item-desc{
+        padding: 20px 0;
+    }
+    /* ##################### section : faq ################### */
+    .faq-inner{
+        width: 100%;
+    }
+    .faq-content > div{
+        float: none;
+        width: 100%;
+        padding: 0;
+        min-height: 550px;
+    }
+    /* ################## section : review ############ */
+    .review{
+        padding: 100px 0;
+    }
+    .review-inner {
+        width: 100%
+    }
+      .review-content {
+        width: 100%;
+        
+    }
+    .review-slider div p {
+        padding: 0 15px;
+      }
+      h1.slogan {
+        font-size: 22px;
+      }
+      .review-slider .slick-arrow{
+          display: none;
+      }
+    /* ############ Section : focus ################## */
+    .focus-inner{
+        width: 100%;
+    }
+    .focus-item{
+        display: block;
+        width: 100%;
+        margin-bottom: 50px;
+        padding: 0 20px;
+
+    }
+    /* ############### Section : guide ############## */
+    .guide{
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+    .guide-inner{
+        width: 100%;
+    }
+    .guide-content > div{
+        float: none;
+        width: 100%;
+    }
+    .guide-slider{
+        margin-bottom: 80px;
+    }
+    .guide-video h1{
+        font-size: 22px;
+    }
+    .video-headline{
+        font-size: 20px;
+    }
+    .video-headline img{
+        height: 20px;
+        
+    }
+    .video-frame{
+        width: 100%;
+        height: 300px;
+    }
+    /* ################# Section : news ############## */
+    .news{
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+    .news-inner{
+        width: 100%;
+    }
+    .news-content > div {
+        float: none;
+        width: 100%;
+    }
+    .news-big{
+        width: 100%;
+        height: 450px;
+    }
+    .news-left{
+        margin-bottom: 15px;
+    }
+    .news-items{
+        margin-bottom: 15px;
+    }
+    .news-thum{
+        width: 100%;
+        margin-top: 10px;
+    }
+    .news-thum p{
+        margin-top: 10px;
+    }
+    .news-thum .date{
+        margin-top: 0;
+        float: left;
+    }
+    .news-photo{
+        display: block;
+    }
+    .news-photo img{
+        width: 100%;
+    }
+    /* ############# section : footer ############### */
+    footer{
+        padding: 40px 15px;
+        text-align: center;
+    }
+    .footer-inner{
+        width: 100%;
+    }
+    .footer-content > div{
+        float: none;
+        width: 100%;
+    }
+    .policy-sns > div{
+        float: none;
+    }
+    .policy{
+        margin: 10px 0;
+    }
+}

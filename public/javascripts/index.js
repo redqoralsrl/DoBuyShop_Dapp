@@ -100,4 +100,11 @@ $(function() {
     $(window).load(function() {
         Index.init();
     });
+
+    setInterval(function() {
+        // 계정이 바뀌었는지 확인
+        if (web3.eth.accounts[0] !== Index.account) {
+          location.reload();
+        }
+    }, 1000);
 });
