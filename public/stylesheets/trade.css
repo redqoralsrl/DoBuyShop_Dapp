@@ -46,6 +46,9 @@ body {
     color: #fff;
     box-shadow: 0 2px 3px black;
 }
+.plus_box {
+    padding: 10px 10px;
+}
 .tag_body {
     display: flex;
     flex-wrap: wrap;
