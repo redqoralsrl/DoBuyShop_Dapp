@@ -201,7 +201,8 @@ header.active{
     transform: translateY(-5px);
 }
 .btn.start{
-    background-color: #0abde3;
+    /* background-color: #0abde3; */
+    background-color: #bf935b;
 }
 .btn.guide{
     background-color: #fff;
@@ -253,7 +254,7 @@ header.active{
 }
 .ceo-content{
     overflow: hidden;
-    border-bottom: 1px solid #eee;
+    /* border-bottom: 1px solid #eee; */
     padding: 50px 0;
 }
 .ceo-content > div{
@@ -326,7 +327,9 @@ header.active{
 /* #################section: banner ##################### */
 .banner{
     /* background: linear-gradient(to right, #69acfe, #6eaefd); */
-    background: url(../images/wave-line.png) no-repeat center right 100px, linear-gradient(to right, #69acfe, #6eaefd);
+    /* background: url(../images/wave-line.png) no-repeat center right 100px, linear-gradient(to right, #69acfe, #6eaefd); */
+    /* background: url(../images/wave-line.png) no-repeat center right 100px, linear-gradient(to right, #c39d6c, #c19760); */
+    background: url(../images/wave-line.png) no-repeat center right 100px, #fff5e7;
     background-size: 80px;
     padding: 0;
 }
@@ -352,7 +355,8 @@ input[name=tabmenu]{
     width: 30%;
     display: inline-block;
     text-align: center;
-    color: white;
+    /* color: white; */
+    color: #c3afa1;
     margin: 5px;
     cursor: pointer;
 }
@@ -367,7 +371,8 @@ input[name=tabmenu]{
 }
 .tab-btn label em img {
     width: 60px;
-    filter: invert(63%) sepia(63%) saturate(2002%) hue-rotate(187deg) brightness(98%) contrast(106%);
+    /* filter: invert(63%) sepia(63%) saturate(2002%) hue-rotate(187deg) brightness(98%) contrast(106%); */
+    filter: invert(38%) sepia(61%) saturate(296%) hue-rotate(341deg) brightness(103%) contrast(94%);
 }
 .tab-btn label span{
     display: block;
@@ -375,9 +380,10 @@ input[name=tabmenu]{
     
 }
 .tab{
-    color: #fff;
+    /* color: #fff; */
+    color: #966a4c;
     display: none;
-    padding-top: 20px;
+    padding-top: 36px;
     padding-left: 50px;
 }
 .tab h2{
@@ -394,7 +400,8 @@ input[id=tab3]:checked ~ .tabs .tab3{
 input[id=tab1]:checked ~ .tab-btn label[for=tab1] em,
 input[id=tab2]:checked ~ .tab-btn label[for=tab2] em,
 input[id=tab3]:checked ~ .tab-btn label[for=tab3] em{
-    background-color: #30336b;
+    /* background-color: #30336b; */
+    background-color: #966a4c;
 }
 input[id=tab1]:checked ~ .tab-btn label[for=tab1] em img,
 input[id=tab2]:checked ~ .tab-btn label[for=tab2] em img,
@@ -404,7 +411,8 @@ input[id=tab3]:checked ~ .tab-btn label[for=tab3] em img{
 input[id=tab1]:checked ~ .tab-btn label[for=tab1] span,
 input[id=tab2]:checked ~ .tab-btn label[for=tab2] span,
 input[id=tab3]:checked ~ .tab-btn label[for=tab3] span{
-    color: #30336b;
+    /* color: #30336b; */
+    color: #966a4c;
 }
 
 /* ########### Section : feature ############# */
@@ -868,8 +876,10 @@ input[id=tab3]:checked ~ .tab-btn label[for=tab3] span{
 
 /* ############# section : footer ############### */
  footer{
-    background-color: #130f40;
-    color: #bdbdbd;
+    /* background-color: #130f40; */
+    background-color: #6b2b1c;
+    /* color: #bdbdbd; */
+    color: #eee;
     font-size: 14px;
     padding: 60px 0;
 
@@ -903,14 +913,16 @@ input[id=tab3]:checked ~ .tab-btn label[for=tab3] span{
 
 .policy-sns{
     overflow: hidden;
-    border-bottom: 1px solid #32456e;
+    /* border-bottom: 1px solid #32456e; */
+    border-bottom: 1px solid #d4a195;
     padding-bottom: 20px;
 }
 .policy{
     float: left;
 }
 .policy span:first-child a{
-    color: #bdbdbd;
+    /* color: #bdbdbd; */
+    color: #eee;
 }
 .policy span:first-child em{
     font-style: normal;

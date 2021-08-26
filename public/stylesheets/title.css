@@ -9,20 +9,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fff;
+  background-color: #fff5e7;
   padding: 8px 12px;
-  border-bottom: 2px solid rgba(192, 192, 192, 0.933);
+  /* border-bottom: 2px solid rgba(192, 192, 192, 0.933); */
+  border-bottom: 1px solid rgb(240 223 200);
   text-transform: uppercase;
   letter-spacing: 0.6px;
+}
+.navbar_logo {
+  height: 60px;
 }
 .navbar_logo img{
   padding-left: 15px;
   /* height: 40px; */
-  height: 60px;
+  height: 100%;
 }
 .navbar a{
   text-decoration: none;
-  color: #000;
+  /* color: #000; */
+  color: #8c5f41;
 }
 .navbar_menu{
   display: flex;
@@ -31,9 +36,11 @@
 }
 .navbar_menu li{
   padding: 8px 12px;
+  transform: translateY(1px);
 }
 .navbar_menu li:hover{
-  background-color: #8fc3ff;
+  /* background-color: #8fc3ff; */
+  background-color: #e9d8c7;
   border-radius: 4px;
 }
 .navbar__toogleBtn{
