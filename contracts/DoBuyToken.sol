@@ -119,26 +119,8 @@ contract DoBuyToken is ERC20 {
         transfer(owners, prices);
     }
 
-    /**
-     * @param _Ids 운송장번호
-     */
-    function getTrackingArrLength(uint256 _Ids) public view returns(uint256) {
-        // uint256 trackLength = _trackingArray[_Ids].length;
-        // return trackLength;
-        uint256 createdAt = _trackingArray[_Ids][0].timestamp;
-        uint256 currentTrackLength = 1;
-        if(createdAt + 1 minutes <= block.timestamp && block.timestamp < createdAt + 2 minutes) {
-            currentTrackLength = 2;
-        } else if (createdAt + 2 minutes <= block.timestamp && block.timestamp < createdAt + 3 minutes) {
-            currentTrackLength = 3;
-        } else if (createdAt + 3 minutes <= block.timestamp) {
-            currentTrackLength = 4;
-        }
-        return currentTrackLength;
-    }
-
-    function viewUpdate(uint256 _Ids) public view returns(uint256) {
-        uint256 listlength = _trackingArray[_Ids].length;
-        return _trackingArray[_Ids][listlength-1].timestamp;
-    }
+    // function viewUpdate(uint256 _Ids) public view returns(uint256) {
+    //     uint256 listlength = _trackingArray[_Ids].length;
+    //     return _trackingArray[_Ids][listlength-1].timestamp;
+    // }
 }
