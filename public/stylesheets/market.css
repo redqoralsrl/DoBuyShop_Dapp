@@ -23,21 +23,22 @@ body {
     padding: 20px 20px;
 }
 .assert_title {
-    font-size: 30px;
+    font-size: 36px;
     font-family: 'Rampart One', cursive;
     color: #646464;
 }
 .assert_coment {
-    font-family: 'Righteous', cursive;
+    /* font-family: 'Righteous', cursive; */
     font-size: 25px;
-    padding: 15px;
+    padding: 39px 0;
     padding-bottom: 0px;
 }
 .assert_subcom {
-    font-family: 'Righteous', cursive;
+    /* font-family: 'Righteous', cursive; */
     font-size: 20px;
-    padding: 20px;
-    margin-left: 10px;
+    padding: 25px 0;
+    margin-left: 25px;
+    line-height: 30px;
 }
 .assert_body {
     width: 100%;
@@ -153,29 +154,29 @@ body {
     background: #1f61ee;
 }
 .admins_btn {
-    padding: 5px 5px;
+    padding: 5px 21px;
 }
 .admin_button {
-    padding: 5px 5px;
-    border-radius: 10px 10px;
+    padding: 5px 12px;
+    /* border-radius: 10px 10px; */
     border: none;
-    box-shadow: 0 2px 3px black;
+    /* box-shadow: 0 2px 3px black; */
     background: #2baaff;
     color: #fff;
 }
 .admin_button2 {
     padding: 5px 5px;
-    border-radius: 10px 10px;
+    /* border-radius: 10px 10px; */
     border: none;
-    box-shadow: 0 2px 3px black;
+    /* box-shadow: 0 2px 3px black; */
     background: #2baaff;
     color: #fff;
 }
 .admin_button3 {
     padding: 5px 5px;
-    border-radius: 10px 10px;
+    /* border-radius: 10px 10px; */
     border: none;
-    box-shadow: 0 2px 3px black;
+    /* box-shadow: 0 2px 3px black; */
     background: #2baaff;
     color: #fff;
 }
@@ -187,13 +188,15 @@ body {
     transition: 0.3s;
     transform: translateY(-3px);
     color: #fff;
+    box-shadow: 0 2px 3px black;
 }
 .input_form {
     margin-left: 20px;
     border-radius: 20px 20px;
     border: 1px solid #666666;
     width: 600px;
-    padding: 10px 10px;
+    padding: 25px;
+    line-height: 35px;
 }
 
 .container_under {

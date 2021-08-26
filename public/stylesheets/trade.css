@@ -1,0 +1,92 @@
+* {
+    margin:0;
+    padding:0;
+    text-decoration: none;
+    list-style: none;
+}
+@font-face {
+    font-family: 'NEXON Lv2 Gothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv2 Gothic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+    font-family: 'NEXON Lv2 Gothic', sans-serif;
+    font-size: 18px;
+}
+.container {
+    font-weight: bolder;
+    font-size: 20px;
+}
+.container_title {
+    padding: 20px 20px;
+    font-size: 36px;
+    font-family: 'Rampart One', cursive;
+    color: #646464;
+}
+.container_box {
+    padding: 20px 20px;
+
+}
+.tag_head {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+.btn_put {
+    padding: 5px 12px;
+    border: none;
+    background: #2baaff;
+    color: #fff;
+}
+.btn_put:hover {
+    background: #1f61ee;
+    cursor: pointer;
+    transition: 0.3s;
+    transform: translateY(-3px);
+    color: #fff;
+    box-shadow: 0 2px 3px black;
+}
+.tag_body {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.content_box {
+    width: 200px;
+    height: 270px;
+    padding: 5px 5px;
+    border: 1px solid #aaaaaa;
+    border-radius: 10px 10px;
+    text-align: center;
+    margin: 10px 10px;
+}
+.content_number {
+    font-size: 20px;
+    font-family: 'Patrick Hand', cursive;
+    text-align: left;
+}
+.content_box img {
+    width: 150px;
+    height: 150px;
+}
+.content_name {
+    font-family: 'Source Code Pro', monospace;
+    font-weight: bolder;
+}
+.content_btn {
+    font-size: 15px;
+    color: #fff;
+    padding: 4px 9px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px 5px;
+    /* border: 1px solid #1f61ee; */
+    border: none;
+    background: #2baaff;
+    cursor: pointer;
+    transition: 0.5s;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.content_btn:hover {
+    background: #1f61ee;
+}

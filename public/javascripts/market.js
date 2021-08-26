@@ -101,8 +101,8 @@ Market = {
                     let adm = $('.admins_btn');
                     let temp = `
                         <button class="admin_button" id="admin1" onclick="Market.clicks('plus');">NFT 추가</button>
-                        <button class="admin_button2" id="admin2" onclick="Market.clicks('change');">가격변동</button>
-                        <button class="admin_button3" id="admin3" onclick="Market.clicks('del');">NFT 삭제</button>
+                        <button class="admin_button" id="admin2" onclick="Market.clicks('change');">가격변동</button>
+                        <button class="admin_button" id="admin3" onclick="Market.clicks('del');">NFT 삭제</button>
                     `;
                     adm.append(temp);
                 }
@@ -136,13 +136,12 @@ Market = {
                 // "value": web3.utils.toWei(`${price}`,'ether')
                 value: web3.toWei(price,'ether'),
                 gas: 21000,
-            }, async function(err, result) {
+            }, function(err, result) {
                 if(err) {
                     console.log(err);
                 }else{
                     txn_hash = result;
-                    await MarketNFTInstance.buyMarket(_Ids);
-                    await Market.init();
+                    MarketNFTInstance.buyMarket(_Ids, "market");
                 }
             })
         });
@@ -157,11 +156,10 @@ Market = {
         }).then(function(instance1) {
             MarketNFTInstance = instance1;
             return TokenInstance.getOwnerToken(price);
-        }).then(async function(res) {
+        }).then(function(res) {
             if(res) {
                 console.log(res);
-                await MarketNFTInstance.buyMarket(_Ids);
-                await Market.init();
+                MarketNFTInstance.buyMarket(_Ids, "market");
             }
         });
     },
@@ -174,22 +172,22 @@ Market = {
             temp = `
             <div class="input_form">
                 <div class="market_name">
-                <form action="/upload" method="post" enctype="multipart/form-data" id="fileForm">
+                <form action="/upload" method="post" enctype="multipart/form-data" id="fileForm" required>
                     <div>
                         ETH 가격 :
-                        <input type="text" id="struct_eth">
+                        <input type="text" id="struct_eth" required>
                     </div>
                     <div>
                         DoBuy 토큰 가격 :
-                        <input type="number" id="struct_dobuy">
+                        <input type="number" id="struct_dobuy" required>
                     </div>
                     <div>
                         물건 이름 :
-                        <input type="text" id="struct_name">
+                        <input type="text" id="struct_name" required>
                     </div>
                     <div>
                         사진 :
-                        <input type="file" name="fileInput" id="fileInput" accept=".gif, .jpg, .png"/>
+                        <input type="file" name="fileInput" id="fileInput" accept=".gif, .jpg, .png" required/>
                     </div>
                     <input type="button" onclick="Market.upload()" value="등록">
                 </form>
@@ -202,15 +200,15 @@ Market = {
                     <div class="market_name">
                         <div>
                             Goods on sale :
-                            <input type="text" id="name_da">
+                            <input type="text" id="name_da" required>
                         </div>
                         <div>
                             Ethereum Price Change :
-                            <input type="text" id="eths">
+                            <input type="text" id="eths" required>
                         </div>
                         <div>
                             DoBuyToken Price Change :
-                            <input type="text" id="dobuys">
+                            <input type="text" id="dobuys" required>
                         </div>
                         <input type="button" onclick="Market.changePrice();" value="등록">
                     </div>
@@ -222,7 +220,7 @@ Market = {
                     <div class="market_name">
                         <div>
                             Goods on sale :
-                            <input type="text" id="name_pro">
+                            <input type="text" id="name_pro" required>
                         </div>
                         <input type="button" onclick="Market.delProduct();" value="삭제">
                     </div>
@@ -240,9 +238,7 @@ Market = {
         let MarketNFTInstance;
         Market.contracts.MarketNFT.deployed().then(function(instance) {
             MarketNFTInstance = instance;
-            return MarketNFTInstance.changePrice(name, eth_pri, Number(dobuy_pri));
-        }).then(function() {
-            location.reload();
+            MarketNFTInstance.changePrice(name, eth_pri, Number(dobuy_pri));
         });
     },
 
@@ -251,8 +247,8 @@ Market = {
         let MarketNFTInstance;
         Market.contracts.MarketNFT.deployed().then(function(instance) {
             MarketNFTInstance = instance;
-            return MarketNFTInstance.found(names);
-        })
+            MarketNFTInstance.found(names);
+        });
     },
 
     upload: function() {
@@ -269,7 +265,6 @@ Market = {
             processData: false,
             contentType: false,
             success: function (data) {
-                // location.reload();
                 Market.plusNFT(fileName);
             },
             error: function (err) {
@@ -286,11 +281,7 @@ Market = {
             let dob = $('#struct_dobuy').val();
             let na = $('#struct_name').val();
             let picture = fileName;
-            console.log( et, dob, na, picture);
-            console.log(typeof et, typeof dob, typeof na, typeof picture);
-            return MarketNFTInstance.setMarketList(et, dob, na, picture);
-        }).then(function() {
-            location.reload();
+            MarketNFTInstance.setMarketList(et, dob, na, picture);
         });
     }
 

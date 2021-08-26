@@ -65,15 +65,17 @@ MyPage = {
                 let address1 = await MarketNFTInstance._DoBuyToOwner(i);
                 if(address1 == web3.eth.accounts[0]){
                     let data = await MarketNFTInstance._DoBuylist(i);
-                    temp = `
-                        <div class="mypage_card">
-                            <div>${data[0]}</div>
-                            <div>${data[2]}</div>
-                            <img src="/images/${data[3]}" style="width:100px;height:100px"/>
-                            <div class="nft_btn"><button class="btn_base deliver_btn" onclick="MyPage.reqDeliver(${data[0]}, '${data[2]}', '${data[3]}')">배송신청</button></div>
-                        </div>
-                    `;
-                    await getLists.append(temp);
+                    if(data[4] == "market") {
+                        temp = `
+                            <div class="mypage_card">
+                                <div>${data[0]}</div>
+                                <div>${data[2]}</div>
+                                <img src="/images/${data[3]}" style="width:100px;height:100px"/>
+                                <div class="nft_btn"><button class="btn_base deliver_btn" onclick="MyPage.reqDeliver(${data[0]}, '${data[2]}', '${data[3]}')">배송신청</button></div>
+                            </div>
+                        `;
+                        await getLists.append(temp);
+                    }
                     flag = 1;
                 } else {
                     continue;
@@ -313,8 +315,8 @@ $(function() {
 
     setInterval(function() {
         // 계정이 바뀌었는지 확인
-        if (web3.eth.accounts[0] !== Market.account) {
+        if (web3.eth.accounts[0] !== MyPage.account) {
           location.reload();
         }
-    }, 100);
+    }, 1000);
 });

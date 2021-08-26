@@ -101,10 +101,10 @@ contract MarketNFT is DoBuyNFT, Ownable {
     *  @dev MarketList의 물건 사기
     *  @param _num_ids 물건 고유번호
     */
-    function buyMarket(uint256 _num_ids) external {
+    function buyMarket(uint256 _num_ids, string memory _made_by) external {
         ProductBuy[ProductCounts] = ProductTrans(_MarketList[_num_ids].name, msg.sender);
         ProductCounts++;
-        _marketBuy(_MarketList[_num_ids].name, _MarketList[_num_ids].img_url);
+        _marketBuy(_MarketList[_num_ids].name, _MarketList[_num_ids].img_url, _made_by);
     }
 
     /**

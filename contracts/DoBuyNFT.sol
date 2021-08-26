@@ -14,6 +14,7 @@ contract DoBuyNFT is ERC721URIStorage {
     uint256 timestamp; // Time Created
     string name; // NFT names
     string image_url; // IMAGE URL
+    string made_by; // Made By
   }
 
   // 토큰 생성
@@ -21,16 +22,19 @@ contract DoBuyNFT is ERC721URIStorage {
   mapping (uint32 => address) public _DoBuyToOwner;
   event DoBuyCreated (address , uint32);
 
-  /// @dev NFT Have
-  struct Have {
-    string name; // product name
-    uint16 amount;
-    address user_wallet;    
-  }
+  // 개인간 거래 올려놓은 상태
+  mapping(uint32 => bool) public _selling;
 
-  // /// @dev NFT 보유 수량
-  // mapping (uint256 => address) DoBuyCounts;
-  Have[] public haveitem;
+  // /// @dev NFT Have
+  // struct Have {
+  //   string name; // product name
+  //   uint16 amount;
+  //   address user_wallet;    
+  // }
+
+  // // /// @dev NFT 보유 수량
+  // // mapping (uint256 => address) DoBuyCounts;
+  // Have[] public haveitem;
 
   /// @dev Trade Ids
   uint32 public _tradeIds;
@@ -47,7 +51,7 @@ contract DoBuyNFT is ERC721URIStorage {
 
   constructor() ERC721("DoBuyNFT", "DBNFT") {
     owner = msg.sender;
-    _DoBuylist[_tokenIds] = NFTcard(_tokenIds, block.timestamp, "DoBuy Start!", "DoBuy.png");
+    _DoBuylist[_tokenIds] = NFTcard(_tokenIds, block.timestamp, "DoBuy Start!", "DoBuy.png", "market");
     _DoBuyToOwner[_tokenIds] = msg.sender;
     emit DoBuyCreated(msg.sender, _tokenIds);
   }
@@ -57,10 +61,10 @@ contract DoBuyNFT is ERC721URIStorage {
    *  @param _name NFT 제목
    *  @param _image_url NFT 이미지 경로
    */
-  function mint(string memory _name, string memory _image_url) public {
+  function mint(string memory _name, string memory _image_url, string memory _made_by) public {
     _tokenIds++;
     uint32 newItemId = _tokenIds;
-    _DoBuylist[newItemId] = NFTcard(newItemId, block.timestamp, _name, _image_url);
+    _DoBuylist[newItemId] = NFTcard(newItemId, block.timestamp, _name, _image_url, _made_by);
     _mint(msg.sender, newItemId);
     _DoBuyToOwner[newItemId] = msg.sender;
     emit DoBuyCreated(msg.sender, newItemId);
@@ -103,13 +107,13 @@ contract DoBuyNFT is ERC721URIStorage {
   }
     
 
-  function _marketBuy(string memory _name, string memory _img_url) public {
-    mint(_name, _img_url);
-    for(uint256 i = 0; i < haveitem.length; i++) {
-      if(haveitem[i].user_wallet == msg.sender && keccak256(bytes( haveitem[i].name)) == keccak256(bytes(_name))){
-          haveitem[i].amount++;
-      }
-    }
-    haveitem.push(Have(_name, 1, msg.sender));
+  function _marketBuy(string memory _name, string memory _img_url, string memory _made_by) public {
+    mint(_name, _img_url, _made_by);
+    // for(uint256 i = 0; i < haveitem.length; i++) {
+    //   if(haveitem[i].user_wallet == msg.sender && keccak256(bytes( haveitem[i].name)) == keccak256(bytes(_name))){
+    //       haveitem[i].amount++;
+    //   }
+    // }
+    // haveitem.push(Have(_name, 1, msg.sender));
   }
 }
