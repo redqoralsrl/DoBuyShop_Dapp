@@ -17,6 +17,10 @@ body {
 .mypage_container {
     text-align: center;
 }
+.mypage_container h2 {
+    margin-bottom: 40px;
+    text-align: left;
+}
 
 .getLists, .getTracking {
     display: inline-block;
@@ -44,7 +48,8 @@ body {
 
 
 .deliver_btn {
-    background-color: #2642a9;
+    /* background-color: #2642a9; */
+    background-color: #976a4d;
     color: #fff;
 }
 
@@ -54,9 +59,10 @@ body {
     padding: 5px 10px;
 }
 .delivery_bill p {
-    font-size: 14px;
+    font-size: 15px;
     margin-bottom: 3px;
     padding-left: 3%;
+    line-height: 23px;
 }
 .delivery_bill span {
     font-weight: 700;

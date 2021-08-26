@@ -81,7 +81,8 @@ Market = {
         }).then(async function(proCounts) {
             let box = $(".list_body");
             box.empty();
-            for(let i = 0; i < proCounts; i++){
+            endPoint = proCounts - 10 > 0 ? proCounts - 10 : 0;
+            for(let i = proCounts-1; i >= 0; i--){
                 await MarketNFTInstance.ProductBuy(i).then(function(list) {
                     let temp = `
                         <div class="list_box_show">

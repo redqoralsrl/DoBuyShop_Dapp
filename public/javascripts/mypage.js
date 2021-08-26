@@ -61,17 +61,20 @@ MyPage = {
         }).then(async function(Ids) {
             let temp;
             let flag = 0;
+            await getLists.append("<h2>보유한 마켓 NFT 목록</h2>")
             for(let i = 0; i <= Ids; i++) {
                 let address1 = await MarketNFTInstance._DoBuyToOwner(i);
                 if(address1 == web3.eth.accounts[0]){
                     let data = await MarketNFTInstance._DoBuylist(i);
                     if(data[4] == "market") {
                         temp = `
-                            <div class="mypage_card">
-                                <div>${data[0]}</div>
-                                <div>${data[2]}</div>
-                                <img src="/images/${data[3]}" style="width:100px;height:100px"/>
-                                <div class="nft_btn"><button class="btn_base deliver_btn" onclick="MyPage.reqDeliver(${data[0]}, '${data[2]}', '${data[3]}')">배송신청</button></div>
+                            <div class="mypage_card_wrapper">
+                                <p><span>주문번호</span>${data[0]}</p>
+                                <div class="mypage_card">
+                                    <div>${data[2]}</div>
+                                    <img src="/images/${data[3]}" style="width:100px;height:100px"/>
+                                    <div class="nft_btn"><button class="btn_base deliver_btn" onclick="MyPage.reqDeliver(${data[0]}, '${data[2]}', '${data[3]}')">배송신청</button></div>
+                                </div>
                             </div>
                         `;
                         await getLists.append(temp);
@@ -87,13 +90,12 @@ MyPage = {
         MyPage.contracts.DoBuyToken.deployed().then(async function(instance){
             TokenInstance = instance;
             let billLength = Number(await TokenInstance._trackingIds());
-            console.log(web3.eth.accounts[0]);
             let temp;
+            await getTracking.append("<h2>배송신청내역</h2>")
             for(let i = 0; i <= billLength; i++) {
                 let address2 = await TokenInstance._billToOwner(i);
                 if(address2 == web3.eth.accounts[0]) {
                     let bill = await TokenInstance._billArray(i);
-                    console.log('배송추적 들어옴', Number(bill[0]));
                     temp = `
                         <div class="delivery_bill">
                             <p><span>운송장번호</span> ${bill[0]}</p>
