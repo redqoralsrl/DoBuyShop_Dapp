@@ -47,7 +47,7 @@ Trade = {
     render: function() {
         web3.eth.getCoinbase(function(err, account) {
             if (err === null) {
-              Trade.account = account;
+                Trade.account = account;
             //   $("#accountAddress").html("Your Account: " + account);
             }
         });
@@ -131,11 +131,13 @@ Trade = {
 
     madeNFT: function(fileName) {
         let MarketNFTInstance;
-        Trade.contracts.MarketNFT.deployed().then(function(instance) {
+        Trade.contracts.MarketNFT.deployed().then(async function(instance) {
             MarketNFTInstance = instance;
             let na = $('#struct_name').val();
             let picture = fileName;
-            MarketNFTInstance.mint(na, picture, "user");
+            return await MarketNFTInstance.mint(na, picture, "user");
+        }).then(function() {
+            location.reload();
         });
     },
 

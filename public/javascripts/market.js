@@ -236,18 +236,22 @@ Market = {
         let eth_pri = $('#eths').val();
         let dobuy_pri = $('#dobuys').val();
         let MarketNFTInstance;
-        Market.contracts.MarketNFT.deployed().then(function(instance) {
+        Market.contracts.MarketNFT.deployed().then(async function(instance) {
             MarketNFTInstance = instance;
-            MarketNFTInstance.changePrice(name, eth_pri, Number(dobuy_pri));
+            return await MarketNFTInstance.changePrice(name, eth_pri, Number(dobuy_pri));
+        }).then(function() {
+            location.reload();
         });
     },
 
     delProduct: function() {
         let names = $('#name_pro').val();
         let MarketNFTInstance;
-        Market.contracts.MarketNFT.deployed().then(function(instance) {
+        Market.contracts.MarketNFT.deployed().then(async function(instance) {
             MarketNFTInstance = instance;
-            MarketNFTInstance.found(names);
+            return await MarketNFTInstance.found(names);
+        }).then(function() {
+            location.reload();
         });
     },
 
@@ -275,13 +279,15 @@ Market = {
 
     plusNFT: function(fileName) {
         let MarketNFTInstance;
-        Market.contracts.MarketNFT.deployed().then(function(instance) {
+        Market.contracts.MarketNFT.deployed().then(async function(instance) {
             MarketNFTInstance = instance;
             let et = $('#struct_eth').val();
             let dob = $('#struct_dobuy').val();
             let na = $('#struct_name').val();
             let picture = fileName;
-            MarketNFTInstance.setMarketList(et, dob, na, picture);
+            return await MarketNFTInstance.setMarketList(et, dob, na, picture);
+        }).then(function() {
+            location.reload();
         });
     }
 
