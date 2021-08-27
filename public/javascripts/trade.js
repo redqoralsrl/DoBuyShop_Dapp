@@ -58,23 +58,43 @@ Trade = {
             return MarketNFTInstance._tokenIds();
         }).then(async function(counts) {
             let countTotal = Number(counts);
-            let content = $(".tag_body");
-            content.empty();
+            let tag_body = $(".tag_body");
+            let content = $(".content");
+            tag_body.empty();
             for(let i = 1; i <= countTotal; i++) {
-                await MarketNFTInstance._DoBuyToOwner(i).then(async function(address) {
-                    if(address == Trade.account) {
-                        await MarketNFTInstance._DoBuylist(i).then(function(NFTcard) {
-                            if(NFTcard[4] == "user") {
+                await MarketNFTInstance._DoBuylist(i).then(async function(NFTcard) {
+                    if(NFTcard[4] == "user") {
+                        let isSelling = await MarketNFTInstance._selling(Number(NFTcard[0]));
+                        await MarketNFTInstance._DoBuyToOwner(i).then(async function(address) {
+                            if(address == Trade.account) {
                                 let temp = `
-                                <div class="content_box">
-                                    <div class="content_number">NFT ${NFTcard[0]}</div>
-                                    <img class="content_img" src="/images/${NFTcard[3]}">
-                                    <div class="content_name">${NFTcard[2]}</div>
-                                    <button class="content_btn">NFT 판매하기</button>
-                                    <!-- _selling 참고하기 -->
-                                </div>
+                                    <div class="content_box">
+                                        <div class="content_number">NFT ${NFTcard[0]}</div>
+                                        <img class="content_img" src="/images/${NFTcard[3]}">
+                                        <div class="content_name">${NFTcard[2]}</div>`;
+                                        if(isSelling == true) {
+                                            temp = temp + `<button class="content_btn disabled" onclick="Trade.clicks('cancel', ${NFTcard[0]})">판매취소</button>`;
+                                        } else {
+                                            temp = temp + `<button class="content_btn" onclick="Trade.clicks('sell', ${NFTcard[0]})">NFT 판매하기</button>`;
+                                        }
+                                temp = temp + `</div>`;
+                                tag_body.append(temp);
+                            }
+
+                            if(await MarketNFTInstance._selling(Number(NFTcard[0])) == true && address != Trade.account) {
+                                let sellingproduct = await MarketNFTInstance.TradeSell(Number(NFTcard[0]));
+                                let tmp = `
+                                    <div class="content_box selling_nft">
+                                        <div class="content_number">NFT ${NFTcard[0]}</div>
+                                        <img class="content_img" src="/images/${NFTcard[3]}">
+                                        <div class="content_name">${NFTcard[2]}</div>
+                                        <div class="content_eth"><input type="text" value="${sellingproduct[0]}" disabled/><img src="/images/eth.svg" /></div>
+                                        <div class="content_be"><button class="eth_btn" onclick="Trade.buyIt('eth',${NFTcard[0]},${sellingproduct[0]})">Buy</button></div>
+                                        <div class="content_do"><input type="number" value="${sellingproduct[1]}" disabled/><img src="/images/db.svg" /></div>
+                                        <div class="content_bd"><button class="do_btn" onclick="Trade.buyIt('dobuy',${NFTcard[0]},${sellingproduct[1]})">Buy</button></div>
+                                    </div>
                                 `;
-                                content.append(temp);
+                                content.append(tmp);
                             }
                         });
                     }
@@ -83,10 +103,11 @@ Trade = {
         });
     },
 
-    clicks: function(datas) {
-        let forms = $(".plus_box");
+    clicks: function(datas, nftid) {
+        let form1 = $(".plus_box");
+        let form2 = $(".sell_box");
         let temp = '';
-        forms.empty();
+        form1.empty();
         if(datas == "plus") {
             temp = `
                 <div class="form_data">
@@ -103,7 +124,30 @@ Trade = {
                     </form>
                 </div>
             `;
-            forms.append(temp);
+            form1.append(temp);
+        }
+        if(datas == "sell") {
+            temp = `
+            <div class="form_data">
+                    <div>
+                        Ethereum Price :
+                        <input type="text" id="eths" required/>
+                    </div>
+                    <div>
+                        DobuyToken Price :
+                        <input type="text" id="dobuys" required/>
+                    </div>
+                    <input type="button" onclick="Trade.sellNFT(${nftid})" value="등록">
+            </div>
+            `;
+            form2.append(temp);
+        }
+        if(datas == "cancel") {
+            let MarketNFTInstance;
+            Trade.contracts.MarketNFT.deployed().then(function(instance) {
+                MarketNFTInstance = instance;
+                MarketNFTInstance.cancelTrade(nftid);
+            })
         }
     },
 
@@ -121,7 +165,7 @@ Trade = {
             processData: false,
             contentType: false,
             success: function (data) {
-                Trade.madeNFT(fileName);
+                Trade.makeNFT(fileName);
             },
             error: function (err) {
                 console.log(err);
@@ -129,13 +173,90 @@ Trade = {
         });
     },
 
-    madeNFT: function(fileName) {
+    makeNFT: function(fileName) {
         let MarketNFTInstance;
         Trade.contracts.MarketNFT.deployed().then(async function(instance) {
             MarketNFTInstance = instance;
             let na = $('#struct_name').val();
             let picture = fileName;
-            return await MarketNFTInstance.mint(na, picture, "user");
+            if(na != "" && picture != "") {
+                return await MarketNFTInstance.mint(na, picture, "user");
+            } else if (na == "") {
+                alert("이름을 입력해주세요.");
+            } else if (picture == "") {
+                alert("사진을 등록해주세요.");
+            }
+        }).then(function() {
+            location.reload();
+        });
+    },
+
+    sellNFT: function(nftid) {
+        let eth_price = $('#eths').val();
+        let dobuy_price = $('#dobuys').val();
+        console.log('eth, dobuy price', eth_price, Number(dobuy_price));
+        let MarketNFTInstance;
+        Trade.contracts.MarketNFT.deployed().then(async function(instance) {
+            MarketNFTInstance = instance;
+            return await MarketNFTInstance.sellTrade(nftid, eth_price, Number(dobuy_price));
+        }).then(function() {
+            location.reload();
+        });
+    },
+
+    buyIt: async function(token, _Ids, price) {
+        if(token == "eth"){
+            await Trade.ethBuy(token, _Ids, price);
+        }else if (token == "dobuy"){
+            await Trade.dobuyBuy(token, _Ids, price);
+        }
+    },
+
+    ethBuy: async function(token, _Ids, price) {
+        let TokenInstance;
+        let MarketNFTInstance;
+        await Trade.contracts.DoBuyToken.deployed().then(function(instance) {
+            TokenInstance = instance;
+            return Trade.contracts.MarketNFT.deployed();
+        }).then(function(instance1) {
+            MarketNFTInstance = instance1;
+            
+            return TokenInstance.owners();
+        }).then(async function(owner_address) {
+            let txn_hash;
+            await web3.eth.sendTransaction({
+                from: web3.eth.accounts[0],
+                to: owner_address,
+                // "value": web3.utils.toWei(`${price}`,'ether')
+                value: web3.toWei(price,'ether'),
+                gas: 21000,
+            }, async function(err, result) {
+                if(err) {
+                    console.log(err);
+                }else{
+                    txn_hash = result;
+                    return await MarketNFTInstance.buyUser(_Ids);
+                }
+            })
+        }).then(function() {
+            location.reload();
+        });
+    },
+
+    dobuyBuy: async function(token, _Ids, price) {
+        let TokenInstance;
+        let MarketNFTInstance;
+        await Trade.contracts.DoBuyToken.deployed().then(function(instance) {
+            TokenInstance = instance;
+            return Trade.contracts.MarketNFT.deployed();
+        }).then(function(instance1) {
+            MarketNFTInstance = instance1;
+            return TokenInstance.getOwnerToken(price);
+        }).then(async function(res) {
+            if(res) {
+                console.log(res);
+                return await MarketNFTInstance.buyUser(_Ids);
+            }
         }).then(function() {
             location.reload();
         });
@@ -151,7 +272,7 @@ $(function() {
     setInterval(function() {
         // 계정이 바뀌었는지 확인
         if (web3.eth.accounts[0] !== Trade.account) {
-          location.reload();
+            location.reload();
         }
     }, 1000);
 })

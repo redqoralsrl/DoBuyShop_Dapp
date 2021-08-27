@@ -38,6 +38,18 @@ contract MarketNFT is DoBuyNFT, Ownable {
         string img_url; // IMAGE URL
     }
 
+    /// @dev Trade
+    struct TradeList {
+        string price_ETH; // Price of ETH
+        uint256 price_DoBuy; // Price of DoBuy
+    }
+    
+    // 개인간 거래 가격
+    mapping(uint32 => TradeList) public TradeSell;
+
+    // 개인간 거래 올려놓았는지 여부
+    mapping(uint32 => bool) public _selling;
+
     constructor() {
         _MarketList[_MarketIds] = MarketList(_MarketIds, "0", 0, "NFT SHOP", "DoBuy.png");
         _MarketIds++;
@@ -107,6 +119,12 @@ contract MarketNFT is DoBuyNFT, Ownable {
         _marketBuy(_MarketList[_num_ids].name, _MarketList[_num_ids].img_url, _made_by);
     }
 
+    function buyUser(uint32 _num_ids) external {
+        _DoBuyToOwner[_num_ids] = msg.sender;
+        _selling[_num_ids] = false;
+        // _marketBuy(_MarketList[_num_ids].name, _MarketList[_num_ids].img_url, _made_by);
+    }
+
     /**
     *  @dev MarketList의 물건 가격 변경
     *  @param _name 물건 이름
@@ -120,5 +138,21 @@ contract MarketNFT is DoBuyNFT, Ownable {
                 _MarketList[i].price_DoBuy = _dobuy_price;
             }
         }
+    }
+
+    /**
+    *  @dev TradeList에 올려서 물건 팔기
+    *  @param _num_ids NFT 고유번호
+    *  @param _eth_price 이더리움 가격
+    *  @param _dobuy_price DoBuy 토큰 가격
+    */
+    function sellTrade(uint32 _num_ids, string memory _eth_price, uint256 _dobuy_price) public {
+        TradeSell[_num_ids] = TradeList(_eth_price, _dobuy_price);
+        _selling[_num_ids] = true;
+    }
+
+    function cancelTrade(uint32 _num_ids) public {
+        delete TradeSell[_num_ids];
+        _selling[_num_ids] = false;
     }
 }
