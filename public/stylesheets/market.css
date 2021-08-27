@@ -20,7 +20,7 @@ body {
     font-size: 20px;
 }
 .Assert_show {
-    padding: 20px 20px;
+    padding: 20px 15%;
 }
 .assert_title {
     font-size: 36px;
@@ -41,9 +41,10 @@ body {
     line-height: 30px;
 }
 .assert_body {
-    width: 100%;
+    width: 70%;
     overflow-x: hidden;
     padding-top: 8px;
+    margin: 0 auto;
     margin-top: -8px;
     box-sizing: border-box;
 }
@@ -106,13 +107,15 @@ body {
     border-radius: 5px 5px;
     /* border: 1px solid #1f61ee; */
     border: none;
-    background: #2baaff;
+    /* background: #2baaff; */
+    background-color: #bf935b;
     cursor: pointer;
     transition: 0.5s;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 .eth_btn:hover {
-    background: #1f61ee;
+    /* background: #1f61ee; */
+    background-color: #886940;
 }
 .content_do {
     color: #1d84e4;
@@ -145,13 +148,15 @@ body {
     border-radius: 5px 5px;
     /* border: 1px solid #1f61ee; */
     border: none;
-    background: #2baaff;
+    /* background: #2baaff; */
+    background-color: #bf935b;
     cursor: pointer;
     transition: 0.5s;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 .do_btn:hover {
-    background: #1f61ee;
+    /* background: #1f61ee; */
+    background-color: #886940;
 }
 .admins_btn {
     padding: 5px 21px;
@@ -202,37 +207,50 @@ body {
 .container_under {
     font-weight: bolder;
     font-size: 20px;
-    padding: 20px 20px;
-    border: 1px solid #646464;
-    width: 600px;
-    margin: 10px 10px;
-    border-radius: 10px 10px;
-    height: 300px;
-    overflow: scroll;
+    /* padding: 20px 20px; */
+    /* border: 1px solid #646464; */
+    /* width: 600px; */
+    /* margin: 10px 10px; */
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 30px;
+    /* border-radius: 10px 10px; */
 }
 .container_title {
     font-family: 'Source Code Pro', monospace;
-    padding: 15px;
+    padding: 25px 15px;
+    border-bottom: 1px solid #f1d1a8;
+    font-size: 25px;
 }
 .list_box {
-    padding: 15px;
+    /* padding: 15px; */
 }
 .list_title {
     font-family: 'Source Code Pro', monospace;
     font-size: 15px;
+    border-top: 2px solid #bf935b;
+    background: #ffe9cc;
 }
 .list_body {
     font-size: 15px;
+    height: 300px;
+    overflow: scroll;
 }
 .list_box_show {
     display: flex;
 }
+.list_body .list_box_show:nth-child(even) {
+    background: #eee;
+}
+.list_title .list_box_show {
+    border-bottom: 1px solid #f1d1a8;
+}
 .list_data {
-    padding: 5px 5px;
+    padding: 15px 15px;
     font-family: 'Source Code Pro', monospace;
     width: 150px;
 }
 .list_data2 {
-    padding: 5px 5px;
+    padding: 15px 15px;
     font-family: 'Source Code Pro', monospace;
 }
