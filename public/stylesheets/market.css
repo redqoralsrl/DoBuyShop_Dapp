@@ -159,7 +159,10 @@ body {
     background-color: #886940;
 }
 .admins_btn {
-    padding: 5px 21px;
+    padding: 5px 16%;
+}
+.form_data {
+    padding: 10px 15%;
 }
 .admin_button {
     padding: 5px 12px;
@@ -169,25 +172,7 @@ body {
     background: #2baaff;
     color: #fff;
 }
-.admin_button2 {
-    padding: 5px 5px;
-    /* border-radius: 10px 10px; */
-    border: none;
-    /* box-shadow: 0 2px 3px black; */
-    background: #2baaff;
-    color: #fff;
-}
-.admin_button3 {
-    padding: 5px 5px;
-    /* border-radius: 10px 10px; */
-    border: none;
-    /* box-shadow: 0 2px 3px black; */
-    background: #2baaff;
-    color: #fff;
-}
-.admin_button:hover,
-.admin_button2:hover,
-.admin_button3:hover {
+.admin_button:hover {
     background: #1f61ee;
     cursor: pointer;
     transition: 0.3s;
