@@ -144,10 +144,12 @@ Trade = {
         }
         if(datas == "cancel") {
             let MarketNFTInstance;
-            Trade.contracts.MarketNFT.deployed().then(function(instance) {
+            Trade.contracts.MarketNFT.deployed().then(async function(instance) {
                 MarketNFTInstance = instance;
-                MarketNFTInstance.cancelTrade(nftid);
-            })
+                return await MarketNFTInstance.cancelTrade(nftid);
+            }).then(function() {
+                location.reload();
+            });
         }
     },
 
