@@ -22,9 +22,6 @@ contract DoBuyNFT is ERC721URIStorage {
   mapping (uint32 => address) public _DoBuyToOwner;
   event DoBuyCreated (address , uint32);
 
-  // 개인간 거래 올려놓은 상태
-  mapping(uint32 => bool) public _selling;
-
   // /// @dev NFT Have
   // struct Have {
   //   string name; // product name

@@ -71,8 +71,9 @@ MyPage = {
                             <div class="mypage_card_wrapper">
                                 <p><span>주문번호</span>${data[0]}</p>
                                 <div class="mypage_card">
-                                    <div>${data[2]}</div>
-                                    <img src="/images/${data[3]}" style="width:100px;height:100px"/>
+                                    <div>구매 시간 : ${MyPage.Unix_timestamp(data[1])}</div>
+                                    <div>상품명 : ${data[2]}</div>
+                                    <img src="/images/${data[3]}"/>
                                     <div class="nft_btn"><button class="btn_base deliver_btn" onclick="MyPage.reqDeliver(${data[0]}, '${data[2]}', '${data[3]}')">배송신청</button></div>
                                 </div>
                             </div>

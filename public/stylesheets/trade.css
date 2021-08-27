@@ -54,23 +54,35 @@ body {
     flex-wrap: wrap;
     width: 100%;
 }
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    /* width: calc(100% + 100px); */
+    width: 100%;
+}
 .content_box {
     width: 200px;
-    height: 270px;
+    height: 290px;
     padding: 5px 5px;
     border: 1px solid #aaaaaa;
     border-radius: 10px 10px;
     text-align: center;
     margin: 10px 10px;
 }
-.content_number {
-    font-size: 20px;
-    font-family: 'Patrick Hand', cursive;
-    text-align: left;
+.content_box:hover {
+    box-shadow: 2px 2px #9b9b9b;
 }
 .content_box img {
     width: 150px;
     height: 150px;
+}
+.content_box div {
+    margin-top: 5px;
+}
+.content_number {
+    font-size: 20px;
+    font-family: 'Patrick Hand', cursive;
+    text-align: left;
 }
 .content_name {
     font-family: 'Source Code Pro', monospace;
@@ -93,3 +105,100 @@ body {
 .content_btn:hover {
     background: #1f61ee;
 }
+.content_btn.disabled {
+    background:#eee;
+    color: #000;
+}
+.content_btn.disabled:hover {
+    background:#c7c7c7;
+}
+.selling_nft {
+    height: 350px;
+}
+.content_eth {
+    color: #e41d1d;
+    font-weight: bold;
+    font-size: 15px;
+}
+.content_eth input {
+    font-family: 'Source Code Pro', monospace;
+    width: 150px;
+    text-align: right;
+    border: none;
+    font-weight: bolder;
+    font-size: 15px;
+    padding-right: 20px;
+}
+.content_eth img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+.content_be {
+    text-align: right;
+}
+.eth_btn {
+    font-size: 15px;
+    color: #fff;
+    padding: 4px 9px;
+    margin-bottom: 5px;
+    border-radius: 5px 5px;
+    /* border: 1px solid #1f61ee; */
+    border: none;
+    /* background: #2baaff; */
+    background-color: #bf935b;
+    cursor: pointer;
+    transition: 0.5s;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.eth_btn:hover {
+    /* background: #1f61ee; */
+    background-color: #886940;
+}
+.content_do {
+    color: #1d84e4;
+    font-weight: bold;
+    font-size: 15px;
+}
+.content_do input {
+    font-family: 'Source Code Pro', monospace;
+    width: 150px;
+    text-align: right;
+    border: none;
+    font-weight: bolder;
+    font-size: 15px;
+    padding-left: 15px;
+    padding-right: 5px;
+}
+.content_do img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+.content_bd {
+    text-align: right;
+}
+.do_btn {
+    font-size: 15px;
+    color: #fff;
+    padding: 4px 9px;
+    margin-bottom: 5px;
+    border-radius: 5px 5px;
+    /* border: 1px solid #1f61ee; */
+    border: none;
+    /* background: #2baaff; */
+    background-color: #bf935b;
+    cursor: pointer;
+    transition: 0.5s;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.do_btn:hover {
+    /* background: #1f61ee; */
+    background-color: #886940;
+}
+.admins_btn {
+    padding: 5px 16%;
+}
+/* .form_data {
+    padding: 10px 15%;
+} */
