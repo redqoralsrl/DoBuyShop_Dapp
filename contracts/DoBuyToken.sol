@@ -93,9 +93,9 @@ contract DoBuyToken is ERC20 {
         _billArray[_trackingIds] = deliveryBill(_trackingIds, _amount, _name, "DoBuy Market", _receiver, _dest);
         _billToOwner[_trackingIds] = msg.sender;
         _trackingArray[_trackingIds].push(deliveryTracking(block.timestamp, "geumbok building", "Start Delivery"));
-        _trackingArray[_trackingIds].push(deliveryTracking(block.timestamp + 1 minutes, location[userDeliveryNum], "Delivering"));
-        _trackingArray[_trackingIds].push(deliveryTracking(block.timestamp + 2 minutes, location[(userDeliveryNum + 1) % 4], "Delivering"));
-        _trackingArray[_trackingIds].push(deliveryTracking(block.timestamp + 3 minutes, _dest, "Delivery Completed"));
+        _trackingArray[_trackingIds].push(deliveryTracking(block.timestamp + 5 minutes, location[userDeliveryNum], "Delivering"));
+        _trackingArray[_trackingIds].push(deliveryTracking(block.timestamp + 10 minutes, location[(userDeliveryNum + 1) % 4], "Delivering"));
+        _trackingArray[_trackingIds].push(deliveryTracking(block.timestamp + 15 minutes, _dest, "Delivery Completed"));
         return _trackingIds;
     }
     /**

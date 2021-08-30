@@ -19,13 +19,13 @@ body {
     font-size: 20px;
 }
 .container_title {
-    padding: 20px 20px;
+    padding: 20px 15%;
     font-size: 36px;
     font-family: 'Rampart One', cursive;
     color: #646464;
 }
 .container_box {
-    padding: 20px 20px;
+    padding: 20px 15%;
 
 }
 .tag_head {
@@ -202,3 +202,10 @@ body {
 /* .form_data {
     padding: 10px 15%;
 } */
+.trade_container {
+    padding: 20px 15%;
+}
+.trade_titles {
+    font-size: 25px;
+    margin-bottom: 10px;
+}

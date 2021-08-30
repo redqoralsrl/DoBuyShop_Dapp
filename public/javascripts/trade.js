@@ -181,13 +181,14 @@ Trade = {
             MarketNFTInstance = instance;
             let na = $('#struct_name').val();
             let picture = fileName;
-            if(na != "" && picture != "") {
-                return await MarketNFTInstance.mint(na, picture, "user");
-            } else if (na == "") {
-                alert("이름을 입력해주세요.");
-            } else if (picture == "") {
-                alert("사진을 등록해주세요.");
-            }
+            return await MarketNFTInstance.mint(na, picture, "user");
+            // if(na != "" && picture != "") {
+            //     return await MarketNFTInstance.mint(na, picture, "user");
+            // } else if (na == "") {
+            //     return alert("이름을 입력해주세요.");
+            // } else if (picture == "") {
+            //     return alert("사진을 등록해주세요.");
+            // }
         }).then(function() {
             location.reload();
         });
