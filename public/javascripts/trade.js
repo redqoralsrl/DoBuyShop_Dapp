@@ -113,14 +113,15 @@ Trade = {
                 <div class="form_data">
                     <form action="/upload" method="post" enctype="multipart/form-data" id="fileForm" required>
                         <div>
-                            물건 이름 :
-                            <input type="text" id="struct_name" required>
+                            상품명 :
+                            <input type="text" id="struct_name" placeholder='상품명을 입력해주세요' required>
                         </div>
-                        <div>
-                            사진 :
+                        <div class="filebox">
+                            이미지 업로드 :
+                            <label for="fileInput">사진 선택</label>
                             <input type="file" name="fileInput" id="fileInput" accept=".gif, .jpg, .png" required/>
                         </div>
-                        <input type="button" onclick="Trade.upload()" value="등록">
+                        <input type="button" onclick="Trade.upload()" value="등록" class="input_submit">
                     </form>
                 </div>
             `;
@@ -137,7 +138,7 @@ Trade = {
                         DobuyToken Price :
                         <input type="text" id="dobuys" required/>
                     </div>
-                    <input type="button" onclick="Trade.sellNFT(${nftid})" value="등록">
+                    <input class="sell_btn" type="button" onclick="Trade.sellNFT(${nftid})" value="등록">
             </div>
             `;
             form2.append(temp);

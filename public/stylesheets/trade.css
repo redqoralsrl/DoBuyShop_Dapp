@@ -28,18 +28,22 @@ body {
     padding: 20px 20px;
 
 }
+
 .tag_head {
     font-size: 25px;
     margin-bottom: 10px;
+    margin-left: 20px;
 }
 .btn_put {
     padding: 5px 12px;
     border: none;
-    background: #2baaff;
+    background: #8c5f41;
     color: #fff;
+    margin-left:20px;
+    font-family: 'NEXON Lv2 Gothic';
 }
 .btn_put:hover {
-    background: #1f61ee;
+    background: #884a20;
     cursor: pointer;
     transition: 0.3s;
     transform: translateY(-3px);
@@ -97,13 +101,20 @@ body {
     border-radius: 5px 5px;
     /* border: 1px solid #1f61ee; */
     border: none;
-    background: #2baaff;
+    background: #bf935b;
     cursor: pointer;
     transition: 0.5s;
+    font-family: 'NEXON Lv2 Gothic';
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 .content_btn:hover {
-    background: #1f61ee;
+    background: #884a20;
+    cursor: pointer;
+    transition: 0.3s;
+    transform: translateY(-3px);
+    color: #fff;
+    box-shadow: 0 2px 3px black;
+
 }
 .content_btn.disabled {
     background:#eee;
@@ -152,8 +163,12 @@ body {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 .eth_btn:hover {
-    /* background: #1f61ee; */
-    background-color: #886940;
+    background: #884a20;
+    cursor: pointer;
+    transition: 0.3s;
+    transform: translateY(-3px);
+    color: #fff;
+    box-shadow: 0 2px 3px black;
 }
 .content_do {
     color: #1d84e4;
@@ -199,6 +214,100 @@ body {
 .admins_btn {
     padding: 5px 16%;
 }
-/* .form_data {
-    padding: 10px 15%;
-} */
+.form_data {
+    /* line-height:150%;
+    font-weight: 700;
+    margin-right: 5px;
+    border: 2px solid #d3d3d3;
+    width: 430px;
+    padding : 15px 0px 8px 15px ;
+    line-height:200%;
+    border-radius:15px; */
+    line-height:150%;
+    font-weight: 700;
+    margin-right: 5px;
+    width:430px;
+    margin-left: 8px;
+    padding: 25px;
+    line-height: 35px;
+    background-color: #fff5e7;
+    color: #403d3d;
+}
+
+.input_submit {
+
+    padding: 5px 12px;
+    border: none;
+    background: #8c5f41;
+    color: #fff;
+    padding-top:5px;
+    cursor: pointer;
+    font-family: 'NEXON Lv2 Gothic';
+}
+.input_submit:hover{
+    background: #884a20;
+    cursor: pointer;
+    transition: 0.3s;
+    transform: translateY(-3px);
+    color: #fff;
+    box-shadow: 0 2px 3px black;
+}
+#struct_name {
+    width: 77%;
+    height: 25px;
+    border-radius: 0px;
+    outline: none;
+    border: 1px solid #c1c1c1;
+    margin-left: 4px;
+}
+.filebox input[type="file"] {
+
+    position: absolute; 
+    width: 1px; 
+    height: 1px; 
+    padding: 0; 
+    margin: -1px; 
+    clip:rect(0,0,0,0); border: 0;
+}
+.filebox label { 
+    display: inline-block;
+    font-size: 14px;
+    line-height: normal;
+    vertical-align: middle;
+    font-weight: 500;
+    padding: 5px 12px;
+    border: none;
+    background: #8c5f41;
+    color: #fff;
+    padding-top: 5px;
+    cursor: pointer;
+    font-family: 'NEXON Lv2 Gothic';
+}
+.filebox label:hover{
+    background: #884a20;
+    cursor: pointer;
+    transition: 0.3s;
+    transform: translateY(-3px);
+    color: #fff;
+    box-shadow: 0 2px 3px black;
+}
+
+
+
+.sell_btn{
+    padding: 5px 12px;
+    border: none;
+    background: #8c5f41;
+    color: #fff;
+    padding-top:5px;
+    cursor: pointer;
+    font-family: 'NEXON Lv2 Gothic';
+}
+.sell_btn:hover{
+    background: #884a20;
+    cursor: pointer;
+    transition: 0.3s;
+    transform: translateY(-3px);
+    color: #fff;
+    box-shadow: 0 2px 3px black;
+}

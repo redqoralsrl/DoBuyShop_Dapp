@@ -63,7 +63,11 @@ body {
     text-align: center;
     margin: 10px 10px;
 }
-.content_box:hover {
+.content_box:hover
+
+
+
+{
     box-shadow: 2px 2px #9b9b9b;
 }
 .content_box img {
@@ -169,11 +173,11 @@ body {
     /* border-radius: 10px 10px; */
     border: none;
     /* box-shadow: 0 2px 3px black; */
-    background: #2baaff;
+    background: #8c5f41;
     color: #fff;
 }
 .admin_button:hover {
-    background: #1f61ee;
+    background: #884a20;
     cursor: pointer;
     transition: 0.3s;
     transform: translateY(-3px);
@@ -181,14 +185,30 @@ body {
     box-shadow: 0 2px 3px black;
 }
 .input_form {
-    margin-left: 20px;
-    border-radius: 20px 20px;
-    border: 1px solid #666666;
-    width: 600px;
+    margin-left: 18px;
+
+    width: 81%;
     padding: 25px;
     line-height: 35px;
+    background-color: #fff5e7;
+    color: #403d3d;
 }
+.input_form ._submit{
+    padding: 5px 12px;
+    border: none;
+    background: #8c5f41;
+    color: #fff;
+    cursor: pointer;
+}
+.input_form ._submit:hover{
+    background: #884a20;
+    cursor: pointer;
+    transition: 0.3s;
+    transform: translateY(-3px);
+    color: #fff;
+    box-shadow: 0 2px 3px black;
 
+}
 .container_under {
     font-weight: bolder;
     font-size: 20px;
@@ -238,4 +258,35 @@ body {
 .list_data2 {
     padding: 15px 15px;
     font-family: 'Source Code Pro', monospace;
+}
+.filebox input[type="file"] {
+
+    position: absolute; 
+    width: 1px; 
+    height: 1px; 
+    padding: 0; 
+    margin: -1px; 
+    clip:rect(0,0,0,0); border: 0;
+}
+.filebox label { 
+    display: inline-block;
+    font-size: 14px;
+    line-height: normal;
+    vertical-align: middle;
+    font-weight: 500;
+    padding: 5px 12px;
+    border: none;
+    background: #8c5f41;
+    color: #fff;
+    padding-top: 5px;
+    cursor: pointer;
+    font-family: 'NEXON Lv2 Gothic';
+}
+.filebox label:hover{
+    background: #884a20;
+    cursor: pointer;
+    transition: 0.3s;
+    transform: translateY(-3px);
+    color: #fff;
+    box-shadow: 0 2px 3px black;
 }

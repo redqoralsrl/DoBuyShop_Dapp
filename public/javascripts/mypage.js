@@ -68,16 +68,19 @@ MyPage = {
                     let data = await MarketNFTInstance._DoBuylist(i);
                     if(data[4] == "market") {
                         temp = `
-                            <div class="mypage_card_wrapper">
-                                <p><span>주문번호</span>${data[0]}</p>
-                                <div class="mypage_card">
-                                    <div>구매 시간 : ${MyPage.Unix_timestamp(data[1])}</div>
-                                    <div>상품명 : ${data[2]}</div>
-                                    <img src="/images/${data[3]}"/>
-                                    <div class="nft_btn"><button class="btn_base deliver_btn" onclick="MyPage.reqDeliver(${data[0]}, '${data[2]}', '${data[3]}')">배송신청</button></div>
+                            <div class="mypage_card_wrapper"">
+                                <img src="/images/${data[3]}"/>
+                                <div class="mypage_card"">
+                                        <ul>
+                                            <li><span>주문 번호</span>  ${data[0]} </li>
+                                            <li><span>구매 시간</span>  ${MyPage.Unix_timestamp(data[1])}</li>
+                                            <li><span>상품명</span>  ${data[2]} </li>
+                                            <div class="nft_btn"><button class="btn_base deliver_btn" onclick="MyPage.reqDeliver(${data[0]}, '${data[2]}', '${data[3]}')">배송신청</button></div>
+                                        </ul>
                                 </div>
                             </div>
                         `;
+                        
                         await getLists.append(temp);
                     }
                     flag = 1;
