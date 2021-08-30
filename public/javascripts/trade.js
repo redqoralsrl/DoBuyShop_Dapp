@@ -60,7 +60,7 @@ Trade = {
             let countTotal = Number(counts);
             let tag_body = $(".tag_body");
             let content = $(".content");
-            tag_body.empty();
+            await tag_body.empty();
             for(let i = 1; i <= countTotal; i++) {
                 await MarketNFTInstance._DoBuylist(i).then(async function(NFTcard) {
                     if(NFTcard[4] == "user") {
@@ -181,17 +181,16 @@ Trade = {
             MarketNFTInstance = instance;
             let na = $('#struct_name').val();
             let picture = fileName;
-            return await MarketNFTInstance.mint(na, picture, "user");
-            // if(na != "" && picture != "") {
-            //     return await MarketNFTInstance.mint(na, picture, "user");
-            // } else if (na == "") {
-            //     return alert("이름을 입력해주세요.");
-            // } else if (picture == "") {
-            //     return alert("사진을 등록해주세요.");
-            // }
-        }).then(function() {
-            location.reload();
-        });
+            if(na != "" && picture != "") {
+                await MarketNFTInstance.mint(na, picture, "user").then(function() {
+                    location.reload();
+                });
+            } else if (na == "") {
+                alert("이름을 입력해주세요.");
+            } else if (picture == "") {
+                alert("사진을 등록해주세요.");
+            }
+        })
     },
 
     sellNFT: function(nftid) {
@@ -233,17 +232,19 @@ Trade = {
                 // "value": web3.utils.toWei(`${price}`,'ether')
                 value: web3.toWei(price,'ether'),
                 gas: 21000,
-            }, async function(err, result) {
+            }, function(err, result) {
+                console.log('들어옴');
                 if(err) {
                     console.log(err);
                 }else{
+                    console.log("고유번호", _Ids);
                     txn_hash = result;
-                    return await MarketNFTInstance.buyUser(_Ids);
+                    MarketNFTInstance.buyUser(_Ids).then(function() {
+                        location.reload();
+                    });
                 }
-            })
-        }).then(function() {
-            location.reload();
-        });
+            });
+        })
     },
 
     dobuyBuy: async function(token, _Ids, price) {
