@@ -186,11 +186,12 @@ Market = {
                         물건 이름 :
                         <input type="text" id="struct_name" required>
                     </div>
-                    <div>
+                    <div class="filebox">
                         사진 :
+                        <label for="fileInput">사진 선택</label>
                         <input type="file" name="fileInput" id="fileInput" accept=".gif, .jpg, .png" required/>
                     </div>
-                    <input type="button" onclick="Market.upload()" value="등록">
+                    <input class="_submit" type="button" onclick="Market.upload()" value="등록">
                 </form>
                 </div>
             </div>
@@ -200,18 +201,18 @@ Market = {
                 <div class="input_form">
                     <div class="market_name">
                         <div>
-                            Goods on sale :
+                            상품명 :
                             <input type="text" id="name_da" required>
                         </div>
                         <div>
-                            Ethereum Price Change :
+                            이더리움 가격 변경 :
                             <input type="text" id="eths" required>
                         </div>
                         <div>
-                            DoBuyToken Price Change :
+                            DoBuy토큰 가격 변경 :
                             <input type="text" id="dobuys" required>
                         </div>
-                        <input type="button" onclick="Market.changePrice();" value="등록">
+                        <input class="_submit" type="button" onclick="Market.changePrice();" value="등록">
                     </div>
                 </div>
             `;
@@ -220,10 +221,10 @@ Market = {
                 <div class="input_form">
                     <div class="market_name">
                         <div>
-                            Goods on sale :
+                            상품명 :
                             <input type="text" id="name_pro" required>
                         </div>
-                        <input type="button" onclick="Market.delProduct();" value="삭제">
+                        <input class="_submit" type="button" onclick="Market.delProduct();" value="삭제">
                     </div>
                 </div>
             `;
