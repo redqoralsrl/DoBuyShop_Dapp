@@ -77,6 +77,10 @@
     text-decoration: none;
     background-color: rgb(253, 234, 241);
 }
+.swap_btn:hover {
+    background-color: rgb(255, 172, 203);
+    color: #fff;
+}
 .swap_sendToken img, .swap_receiveToken img {
     width: 30px;
     height: 20px;
