@@ -49,6 +49,10 @@ app.get('/trade', function(req, res, next) {
   res.render('trade');
 });
 
+app.get('/swap', function(req, res, next) {
+  res.render('swap');
+});
+
 app.post('/upload', function(req, res, next) {
   var form = new multiparty.Form();
   form.on('field', function(name, value){

@@ -1,0 +1,121 @@
+*{
+    margin:0;
+    padding:0;
+    text-decoration: none;
+    list-style: none;
+  }
+
+.swap_main{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 120px 16px 0px;
+    -webkit-box-align: center;
+    align-items: center;
+    flex: 1 1 0%;
+    z-index: 1;
+}
+
+.swap_box{
+    position: relative;
+    max-width: 480px;
+    width: 100%;
+    background-color: #fff5e7;
+    box-shadow: rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 4%) 0px 4px 8px, rgb(0 0 0 / 4%) 0px 16px 24px, rgb(0 0 0 / 1%) 0px 24px 32px;
+    border-radius: 24px;
+    margin-top: 1rem;
+}
+
+.swap_trade {
+    border-radius: 24px;
+    z-index: 2;
+
+}
+.swap_title{
+    padding: 1rem 1.25rem 0.5rem;
+    color: rgb(86, 90, 105);
+    font-weight: 800;
+}
+
+.swap_page{
+    position: relative;
+    padding: 8px;
+}
+
+
+.swap_send, .swap_receive {
+    background-color:rgb(247, 248, 250);
+    border: 1px solid rgb(237, 238, 242);
+    position: relative;
+    border-radius: 20px;
+    z-index: 2;
+    width: 100%;
+}
+
+.swap_arrow {
+    text-align: center;
+    /* margin-bottom: 0.3rem; */
+    border-radius: 12px;
+    color: rgb(184, 184, 187);
+    /* border: 1px solid rgb(237, 238, 242);
+    background-color: rgb(247, 248, 250); */
+    font-size: 0.8rem;
+    font-weight: 800;
+    width: 100%;
+    height: 20px;
+}
+.swap_btn{
+    padding: 1.3rem 0;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 800;
+    text-align: center;
+    border-radius: 20px;
+    outline: none;
+    color: rgb(86, 90, 105);;
+    border: 1px solid transparent;
+    text-decoration: none;
+    background-color: rgb(253, 234, 241);
+}
+.swap_sendToken img, .swap_receiveToken img {
+    width: 30px;
+    height: 20px;
+}
+.rate {
+    text-align: right;
+    margin: 0.3rem 0 0.3rem;
+    color: rgb(86, 90, 105);
+}
+.swap_sendToken, .swap_receiveToken{
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    color: rgb(86, 90, 105);
+    box-shadow: rgb(0 0 0 / 8%) 0px 6px 10px;
+    border-radius: 16px;
+    outline: none;
+    border: none;
+    padding: 0 0.5rem 0 0;
+    font-size: 25px;
+    font-weight: 600;
+    /* text-align: left;
+    align-items: center;
+    vertical-align: middle; */
+}
+.swap_send_div, .swap_send_div {
+    align-items: center;
+    padding: 1.8rem 1rem;
+}
+
+.swap_sendAmount, .swap_receiveAmount{
+    background-color:rgb(247, 248, 250);
+    font-weight: 500;
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 24px;
+    padding: 0px;
+    text-align: right;
+    color: black;
+    border-radius: 20px;
+}
+

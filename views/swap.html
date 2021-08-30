@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DoBuyShop</title>
+    <link rel='stylesheet' href='/stylesheets/swap.css' />
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <link rel='stylesheet' href='/stylesheets/title.css' />
+
+  </head>
+  <body>
+    <!-- title -->
+    <div class="title">
+      <div class="navbar">
+          <div class="navbar_logo">
+              <a href="/">
+                  <img src="/images/dobuy_logo.png">
+              </a>
+          </div>
+          <ul class="navbar_menu">
+              <li><a href="/swap">Swap</a></li>
+              <li><a href="/market">NFT Market</a></li>
+              <li><a href="/trade">NFT Trade</a></li>
+              <li><a href="/mypage">My Page</a></li>
+          </ul>
+          <a href="#" class="navbar__toogleBtn">
+              <i class="fas fa-bars"></i>
+          </a>
+      </div>
+    </div>
+    <div class="swap_main">
+        <div class="swap_box">
+            <div class="swap_title">Swap</div>
+            <div class="swap_page">
+                <div class="swap_trade">
+                  <div class="swap_send">
+                    <div class="swap_send_div">
+                      <div class="swap_sendToken"><img src="/images/eth.svg" />ETH</div>
+                      <input class="swap_sendAmount" onkeyup="Swap.ChangeDBT()" type="text" placeholder="0.0">
+                    </div>
+                  </div>
+                <div class="swap_arrow">[&darr;]</div>
+                <div class="swap_receive">
+                    <div class="swap_send_div">
+                      <div class="swap_receiveToken"><img src="/images/db.svg" />DBT</div>
+                      <input class="swap_receiveAmount"  type="text" placeholder="0.0">
+                    </div>
+                </div>
+                <div class="rate">1 ETH = 2700 DBT </div>
+                <div class="swap_button"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </body>
+  <script src="/javascripts/title.js"></script>
+  <script src="/javascripts/web3.min.js"></script>
+  <script src="/javascripts/truffle-contract.js"></script>
+  <script src="/javascripts/index.js"></script>
+  <script src="/javascripts/swap.js"></script>
+</html>

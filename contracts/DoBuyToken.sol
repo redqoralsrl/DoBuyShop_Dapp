@@ -70,6 +70,16 @@ contract DoBuyToken is ERC20 {
         _mint(owners, INITIAL_SUPPLY * 10 ** _decimals);
     }
     
+    // DoBuyToken 과 ETH 를 Swap
+    // TokenSwap.sol에서 사용 
+    // @dev _buyer : token 사는 사람
+    // @dev _tokenAmount : token 받는 수량
+    // @rate : 비율 1ETH = 2700DBT
+    function buyingToken(address _buyer, uint _tokenAmount) public{
+        uint256 dbtTokenA = _tokenAmount * 10 ** (uint(decimals()));
+        _transfer(owners, _buyer, dbtTokenA);
+    }
+    
     /**
     * @dev 배송 선택 시. 수령자 이름, 상품 수량, 배송도착지 입력받아야 함.
     * @param _name 상품명
