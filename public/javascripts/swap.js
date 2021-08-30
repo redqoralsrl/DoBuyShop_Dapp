@@ -72,7 +72,9 @@ Swap = {
                     console.log(err);
                 }else{
                     txn_hash = result;
-                    TokenInstance.buyingToken(web3.eth.accounts[0], sendETH * 2700);
+                    TokenInstance.buyingToken(web3.eth.accounts[0], sendETH * 2700).then(function() {
+                        location.reload();
+                    });
                 }
             })
         });
