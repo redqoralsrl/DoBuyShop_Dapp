@@ -75,11 +75,13 @@
     color: rgb(86, 90, 105);;
     border: 1px solid transparent;
     text-decoration: none;
-    background-color: rgb(253, 234, 241);
+    /* background-color: rgb(253, 234, 241); */
+    background-color: rgb(244, 255, 173);
 }
 .swap_btn:hover {
-    background-color: rgb(255, 172, 203);
-    color: #fff;
+    /* background-color: rgb(255, 172, 203); */
+    background-color: rgb(255, 230, 80);
+    /* color: #fff; */
 }
 .swap_sendToken img, .swap_receiveToken img {
     width: 30px;
