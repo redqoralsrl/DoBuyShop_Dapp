@@ -18,7 +18,7 @@ MyPage = {
         } else if(window.web3) {
             MyPage.web3Provider = window.web3.currentProvider;
         } else {
-            MyPage.web3Provider = new Web3.provider.HttpProvider("http://localhost:8545");
+            MyPage.web3Provider = new Web3.provider.HttpProvider("https://ropsten.infura.io/v3/ae100d8463574c65aee0cef762d90cd0");
         }
         web3 = new Web3(MyPage.web3Provider);
         web3.eth.defaultAccount = web3.eth.accounts[0];

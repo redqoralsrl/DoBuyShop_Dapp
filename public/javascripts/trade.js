@@ -19,7 +19,7 @@ Trade = {
         } else if(window.web3) {
             Trade.web3Provider = window.web3.currentProvider;
         } else {
-            Trade.web3Provider = new Web3.provider.HttpProvider("http://localhost:8545");
+            Trade.web3Provider = new Web3.provider.HttpProvider("https://ropsten.infura.io/v3/ae100d8463574c65aee0cef762d90cd0");
         }
         web3 = new Web3(Trade.web3Provider);
         web3.eth.defaultAccount = web3.eth.accounts[0];
