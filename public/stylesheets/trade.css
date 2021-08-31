@@ -28,19 +28,32 @@ body {
     padding: 20px 15%;
 
 }
-
+.container_body, .trade_container_body {
+    padding: 50px;
+    border: 1px solid #ccc;
+    font-size: 27px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+    margin-bottom: 30px;
+}
 .tag_head {
     font-size: 25px;
-    margin-bottom: 10px;
-    margin-left: 20px;
+    margin-bottom: 30px;
+    /* margin-left: 20px; */
 }
 .btn_put {
-    padding: 5px 12px;
+    /* padding: 5px 12px; */
     border: none;
     background: #8c5f41;
     color: #fff;
-    margin-left:20px;
+    /* margin-left:20px; */
     font-family: 'NEXON Lv2 Gothic';
+    padding: 11px 20px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    background: #8c5f41;
+    border-radius: 4px;
 }
 .btn_put:hover {
     background: #884a20;
@@ -51,7 +64,7 @@ body {
     box-shadow: 0 2px 3px black;
 }
 .plus_box {
-    padding: 10px 10px;
+    padding: 10px 0;
 }
 .tag_body {
     display: flex;
@@ -214,9 +227,6 @@ body {
 .admins_btn {
     padding: 5px 16%;
 }
-/* .form_data {
-    padding: 10px 15%;
-} */
 .trade_container {
     padding: 20px 15%;
 }
@@ -237,22 +247,31 @@ body {
     font-weight: 700;
     margin-right: 5px;
     width:430px;
-    margin-left: 8px;
     padding: 25px;
-    line-height: 35px;
+    line-height: 45px;
     background-color: #fff5e7;
     color: #403d3d;
+    width: calc(100% - 100px);
+    padding: 50px;
+    font-size: 18px;
 }
-
+.plus_btn {
+    text-align: center;
+}
 .input_submit {
-
-    padding: 5px 12px;
+    /* padding: 5px 12px; */
+    padding: 10px 21px;
     border: none;
     background: #8c5f41;
     color: #fff;
     padding-top:5px;
     cursor: pointer;
     font-family: 'NEXON Lv2 Gothic';
+    height: 35px;
+    line-height: 26px;
+    letter-spacing: 2px;
+    border-radius: 4px;
+    font-size: 16px;
 }
 .input_submit:hover{
     background: #884a20;
@@ -263,12 +282,13 @@ body {
     box-shadow: 0 2px 3px black;
 }
 #struct_name {
-    width: 77%;
+    width: calc(100% - 100px);
     height: 25px;
     border-radius: 0px;
     outline: none;
     border: 1px solid #c1c1c1;
     margin-left: 4px;
+    padding: 0 5px;
 }
 .filebox input[type="file"] {
 
@@ -285,16 +305,18 @@ body {
     line-height: normal;
     vertical-align: middle;
     font-weight: 500;
-    padding: 5px 12px;
+    /* padding: 5px 12px; */
     border: none;
-    background: #8c5f41;
+    background: #bf935b;
     color: #fff;
     padding-top: 5px;
     cursor: pointer;
     font-family: 'NEXON Lv2 Gothic';
+    padding: 8px 14px;
+    border-radius: 4px;
 }
 .filebox label:hover{
-    background: #884a20;
+    background: #8c5f41;
     cursor: pointer;
     transition: 0.3s;
     transform: translateY(-3px);

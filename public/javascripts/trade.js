@@ -121,7 +121,9 @@ Trade = {
                             <label for="fileInput">사진 선택</label>
                             <input type="file" name="fileInput" id="fileInput" accept=".gif, .jpg, .png" required/>
                         </div>
-                        <input type="button" onclick="Trade.upload()" value="등록" class="input_submit">
+                        <div class="plus_btn">
+                            <input type="button" onclick="Trade.upload()" value="등록" class="input_submit">
+                        </div>
                     </form>
                 </div>
             `;
