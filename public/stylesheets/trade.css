@@ -19,13 +19,13 @@ body {
     font-size: 20px;
 }
 .container_title {
-    padding: 20px 15%;
+    padding: 20px 20%;
     font-size: 36px;
     font-family: 'Rampart One', cursive;
     color: #646464;
 }
 .container_box {
-    padding: 20px 15%;
+    padding: 20px 20%;
 
 }
 .container_body, .trade_container_body {
@@ -228,7 +228,7 @@ body {
     padding: 5px 16%;
 }
 .trade_container {
-    padding: 20px 15%;
+    padding: 20px 20%;
 }
 .trade_titles {
     font-size: 25px;
@@ -256,7 +256,8 @@ body {
     font-size: 18px;
 }
 .plus_btn {
-    text-align: center;
+    /* text-align: center; */
+    margin-top: 20px;
 }
 .input_submit {
     /* padding: 5px 12px; */
@@ -282,7 +283,7 @@ body {
     box-shadow: 0 2px 3px black;
 }
 #struct_name {
-    width: calc(100% - 100px);
+    width: calc(100% - 500px);
     height: 25px;
     border-radius: 0px;
     outline: none;
