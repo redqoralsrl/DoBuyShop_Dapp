@@ -46,7 +46,7 @@ Swap = {
             console.log();
             let trade = $(".swap_button");
             let temp = `
-                <button class="swap_btn" onclick="Swap.buytoken()">Swap</button>
+            <button class="swap_btn" onclick="Swap.buytoken()">Connect Wallet</button>
             `;
             trade.append(temp);
         // })

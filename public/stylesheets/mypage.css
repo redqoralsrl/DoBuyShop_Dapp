@@ -37,6 +37,7 @@ body {
     cursor: pointer;
     transition: 0.5s;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    margin-bottom:20px;
 }
 
 /* left: 소유 nft */
@@ -60,6 +61,7 @@ body {
     padding-top:5px;
     cursor: pointer;
     font-family: 'NEXON Lv2 Gothic';
+    border-radius: 4px;
 }
 .deliver_btn:hover{
     background: #884a20;
@@ -105,8 +107,69 @@ body {
     margin: 5px 0;
     margin-left: -40px;
 }
+.req_deliver{
+    margin-bottom: 20px;
+}
 .req_deliver span {
     margin-right: 5px;
+    font-weight: 700;
+}
+
+.input_deliver_info{
+    height: 148px;
+    text-align: left;
+    border: 2px solid rgb(240 223 200);
+    width: 600px;
+    margin: auto;
+    
+}
+.input_deliver_info ul {
+    margin-top: 20px;
+    line-height: 30px;
+    margin-left: 20px;
+}
+/* .input_deliver_info ul input {
+    margin-left:10px;
+}    */
+.input_deliver_info ul span {
+    margin-right: 10px;
+    font-weight: 700;
+
+}
+.input_deliver_info input {
+    height: 20px;
+    width: calc(100% - 100px);
+    border: 1px solid #c1c1c1;
+    padding: 0 5px;
+    margin-left: 4px;
+}
+.input_deliver_info button{
+    letter-spacing: 2px;
+    background: #8c5f41;
+    border-radius: 4px;
+    font-size: 16px;
+    float: right;
+    margin-right: 27px;
+    width: 73px;
+    height: 40px;
+}
+
+.deliver_product_info{
+    height: 100px; 
+    text-align:left;
+    border:2px solid rgb(240 223 200);
+    width: 600px;
+    margin: auto;
+    margin-bottom: 15px;
+}
+.deliver_product_info ul{
+    margin-top: 20px;
+    line-height: 30px;
+    margin-left: 20px;
+}
+.deliver_product_info ul span{
+    margin-right: 10px;
+    font-weight: 700;
 }
 
 /* 운송장 발급 */
@@ -193,3 +256,4 @@ body {
     font-weight: 700;
     margin-right: 5px
 }
+

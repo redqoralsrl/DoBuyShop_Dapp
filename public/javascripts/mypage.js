@@ -123,16 +123,35 @@ MyPage = {
         let getTracking = $(".getTracking");
         getLists.css("width", "94%");
         // getTracking.css("width", "94%");
+        // let temp = `
+        //     <div class="req_deliver">
+        //         <div>${id}</div>
+        //         <div>${name}</div>
+        //         <img src="/images/${image_url}" style="width:100px;height:100px"/>
+        //         <p><span>수령인</span><input id="receiver" type="text" value=""/></p>
+        //         <p><span>배송지</span><input id="destination" type="text" value=""/></p>
+        //         <button class="btn_base deliver_btn" onclick="MyPage.deliver(${id}, '${name}', $('#receiver').val(), $('#destination').val())">배송</button>
+        //     </div>
+        // `
         let temp = `
-            <div class="req_deliver">
-                <div>${id}</div>
-                <div>${name}</div>
-                <img src="/images/${image_url}" style="width:100px;height:100px"/>
-                <p><span>수령인</span><input id="receiver" type="text" value=""/></p>
-                <p><span>배송지</span><input id="destination" type="text" value=""/></p>
-                <button class="btn_base deliver_btn" onclick="MyPage.deliver(${id}, '${name}', $('#receiver').val(), $('#destination').val())">배송</button>
-            </div>
-        `
+        <div class="deliver_product_info">
+            <ul>    
+                <li><span>주문 번호</span>${id}</li>
+                <li><span>상품명</span>${name}</li>
+            </ul>
+        </div>
+        <div class="req_deliver">
+            <img src="/images/${image_url}" style="width:600px;height:400px"/>
+        </div>
+        <div class="input_deliver_info">
+                <ul>
+
+                    <li><span>수령인</span><input id="receiver" type="text" value="" placeholder="수령인을 입력해주세요."/></ㅣ>
+                    <li><span>배송지</span><input id="destination" type="text" value="" placeholder="배송지를 입력해주세요."/></>
+                    <li><button class="btn_base deliver_btn" onclick="MyPage.deliver(${id}, '${name}', $('#receiver').val(), $('#destination').val())">배송</button></li>
+                </ul>
+        </div>
+        `;
         await getLists.empty();
         await getTracking.empty();
         await getLists.append(temp);

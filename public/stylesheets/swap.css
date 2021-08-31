@@ -18,9 +18,10 @@
 
 .swap_box{
     position: relative;
-    max-width: 480px;
+    max-width: 430px;
     width: 100%;
-    background-color: #fff5e7;
+    /* background-color: #fff5e7; */
+    background-color: #e8e5e1;
     box-shadow: rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 4%) 0px 4px 8px, rgb(0 0 0 / 4%) 0px 16px 24px, rgb(0 0 0 / 1%) 0px 24px 32px;
     border-radius: 24px;
     margin-top: 1rem;
@@ -44,25 +45,30 @@
 
 
 .swap_send, .swap_receive {
-    background-color:rgb(247, 248, 250);
+    background-color:rgb(255, 255, 255);
     border: 1px solid rgb(237, 238, 242);
     position: relative;
     border-radius: 20px;
     z-index: 2;
     width: 100%;
 }
-
+.arrow{
+    padding: 0.2rem 1.4rem 0 0;
+    font-size: 15px;
+    font-weight: 900;
+    /* color: rgb(17, 153, 250); */
+    color: salmon;
+}
 .swap_arrow {
-    text-align: center;
+    text-align: right;
     /* margin-bottom: 0.3rem; */
     border-radius: 12px;
-    color: rgb(184, 184, 187);
-    /* border: 1px solid rgb(237, 238, 242);
-    background-color: rgb(247, 248, 250); */
-    font-size: 0.8rem;
-    font-weight: 800;
+    /* color: rgb(70, 70, 71); */
     width: 100%;
-    height: 20px;
+    height: 25px;
+}
+.swap_main_t{
+    font-size: 2rem;
 }
 .swap_btn{
     padding: 1.3rem 0;
@@ -72,15 +78,16 @@
     text-align: center;
     border-radius: 20px;
     outline: none;
-    color: rgb(86, 90, 105);;
+    color: rgb(255, 255, 255);;
     border: 1px solid transparent;
     text-decoration: none;
     /* background-color: rgb(253, 234, 241); */
-    background-color: rgb(244, 255, 173);
+    background-color: #31302f
 }
 .swap_btn:hover {
     /* background-color: rgb(255, 172, 203); */
-    background-color: rgb(255, 230, 80);
+    background-color: #413e3c;
+    cursor: pointer;
     /* color: #fff; */
 }
 .swap_sendToken img, .swap_receiveToken img {
@@ -92,28 +99,38 @@
     margin: 0.3rem 0 0.3rem;
     color: rgb(86, 90, 105);
 }
+.from, .to{
+    color: rgb(86, 90, 105);
+    font-weight: bold;
+    text-align: right;
+    padding: 0 0 0.8rem;
+}
 .swap_sendToken, .swap_receiveToken{
     position: absolute;
-    background-color: rgb(255, 255, 255);
-    color: rgb(86, 90, 105);
-    box-shadow: rgb(0 0 0 / 8%) 0px 6px 10px;
+    /* background-color: rgb(255, 255, 255); */
+    /* background-color: #fff5e7; */
+    color:rgba(11, 20, 38, 0.5);
+    /* box-shadow: rgb(0 0 0 / 8%) 0px 6px 10px; */
     border-radius: 16px;
     outline: none;
     border: none;
-    padding: 0 0.5rem 0 0;
+    /* padding: 0 0.5rem 0 0; */
     font-size: 25px;
-    font-weight: 600;
+    font-weight: 500;
+    /* width: 95%; */
+    text-align: left;
     /* text-align: left;
     align-items: center;
     vertical-align: middle; */
 }
 .swap_send_div, .swap_send_div {
     align-items: center;
-    padding: 1.8rem 1rem;
+    /* padding: 1.8rem 1rem; */
+    padding: 0.3rem 1rem 0.7rem 0.3rem;
 }
 
 .swap_sendAmount, .swap_receiveAmount{
-    background-color:rgb(247, 248, 250);
+    /* background-color:rgb(247, 248, 250); */
     font-weight: 500;
     width: 100%;
     border: none;
@@ -121,7 +138,8 @@
     font-size: 24px;
     padding: 0px;
     text-align: right;
-    color: black;
+    color: rgb(80, 82, 90);
     border-radius: 20px;
+    z-index: 99;
 }
 
